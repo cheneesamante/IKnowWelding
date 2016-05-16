@@ -1,4 +1,4 @@
-# Laravel PHP Framework
+# Laravel PHP Framework Local setup for XAMPP Windows
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
@@ -6,13 +6,43 @@
 [![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Download XAMPPP for windows:
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+https://sourceforge.net/directory/os:windows/?q=xampp%20control%20panel%20v3.2.1
+https://www.apachefriends.org/download.html
 
-## Official Documentation
+## Download source code
+1. clone the source code and put it on C:/xampp/htdocs/Iknowwelding/
+2. It should be on iknowwelding folder
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Local setup Virtual Host
+
+1. Go to C:\xampp\apache\conf\extra 
+2. Update httpd-vhosts.conf file
+3. Append the following line of codes
+
+```
+<VirtualHost *:80> 
+    ServerName Iknowwelding.local 
+     DocumentRoot "C:/xampp/htdocs/Iknowwelding/public" 
+    SetEnv APPLICATION_ENV "development"
+    <Directory "C:/xampp/htdocs/Iknowwelding/public">
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+```
+
+4. In C:\Windows\System32\drivers\etc 
+5. Update hosts file
+6. Append the following:
+```
+127.0.0.1 Iknowwelding.local
+```
+7. Restart the apache
+
 
 ## Contributing
 
