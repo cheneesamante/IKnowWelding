@@ -10,11 +10,24 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+// home
+//Route::get('home', [
+//    'uses' => 'AccountController@home'
+//]);
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', 'AccountController@index')->name('home');
+    // login
+    Route::get('login', function() {
+       return View::make('login'); 
+    });
+    //logout
+    Route::get('logout', 'AccountController@doLogout')->name('logout');
 
-Route::get('/', function () {
-    return "Hello World!";
+    Route::post('login','AccountController@doLogin')->name('login');
+
+    Route::get('home', function() {
+       return View::make('home');
+    });
 });
 
-Route::get('about', function() {
-    return view('pages.about');
-});
+//Route::post('/','AccountController@index');
