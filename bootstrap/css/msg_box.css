@@ -1,0 +1,94 @@
+
+.nav-tabs .glyphicon:not(.no-margin) { margin-right:10px; }
+.tab-pane .list-group-item:first-child {border-top-right-radius: 0px;border-top-left-radius: 0px;}
+.tab-pane .list-group-item:last-child {border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}
+.tab-pane .list-group .checkbox { display: inline-block;margin: 0px; }
+.tab-pane .list-group input[type="checkbox"]{ margin-top: 2px; }
+.tab-pane .list-group .glyphicon { margin-right:5px; }
+.tab-pane .list-group .glyphicon:hover { color:#FFBC00; }
+a.list-group-item.read { color: #222;background-color: #F3F3F3; }
+hr { margin-top: 5px;margin-bottom: 10px; }
+.nav-pills>li>a {padding: 5px 10px;}
+
+.container {
+    width: 850px;
+}
+
+a.list-group-item:hover, a.list-group-item:focus {
+    background-color: #f5f5f5;
+    text-decoration: none;
+}
+
+.msg_header{
+    color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #5bc0de;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: 0px; 
+}
+
+.msg_box {
+    background-color: #f6f6f6;
+    background-image: -moz-linear-gradient(center top , #f6f6f6, #eae8e8);
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px 0 #bbb, 0 2px 0 #aaa, 0 3px 3px #444;
+    overflow: hidden;
+    padding: 8px;
+    
+}
+
+.table th {
+    background-color: transparent;
+    color: #009fbc;
+    padding: 7px 4px;
+    text-align: left;
+}
+
+.table td {
+    background-color: transparent;
+    color: #47433F;
+    border-top: 1px solid #FFF;
+}
+
+.modal-footer{
+    padding-top: 0px;
+    border: 0px;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+#content_main ul li
+{ 
+    background: none;
+    padding: 0px;
+}
+
+#content_main ul {
+    margin: 2px 0 0px;
+}
+
+.list-group-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: block;
+    margin-bottom: -1px;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.tab-content {
+    padding-top: 0px;
+    margin-top: 0px;
+    min-height:240px;
+}
+
+.badge{
+    float: right;
+}
+

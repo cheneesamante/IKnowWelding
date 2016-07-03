@@ -1,0 +1,88 @@
+/*
+Theme: eLearning - Free Educational Responsive Web Template
+Description: Free to use for personal and commercial use
+Author: WebThemez.com
+Website: http://webthemez.com
+Note: Please do not remove the footer backlink (webthemez.com)--(if you want to remove contact: webthemez@gmail.com)
+Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/licenses/by/3.0/
+*/
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+footer {
+    border-top: 1px solid #e5e5e5;
+    background: #ECECEC;
+}
+
+/* Footer */
+.footer1 {
+    background: #fff;
+    padding: 30px 0 0 0;
+    font-size: 12px;
+    color: #999;
+}
+
+    .footer1 a {
+        color: #ccc;
+    }
+
+        .footer1 a:hover {
+            color: #fff;
+        }
+
+    .footer1 .panel {
+        margin-bottom: 30px;
+    }
+
+    .footer1 .panel-title {
+        font-size: 17px;
+        font-weight: bold;
+        color: #ccc;
+        margin: 0 0 20px;
+    }
+
+    .footer1 .entry-meta {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        margin: 0 0 35px 0;
+        padding: 2px 0;
+        color: #888888;
+        font-size: 12px;
+        font-size: 0.75rem;
+    }
+
+        .footer1 .entry-meta a {
+            color: #333333;
+        }
+
+        .footer1 .entry-meta .meta-in {
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+
+.footer2 {
+    background: #060a1b;
+    padding: 15px 0;
+    color: #777;
+    font-size: 12px;
+}
+
+.footer2 a {
+    color: #aaa;
+}
+
+.footer2 a:hover {
+    color: #fff;
+}
+
+.footer2 p {
+    margin: 0;
+}
+
+
+
+footer ul li {
+    list-style: none;
+}
+
