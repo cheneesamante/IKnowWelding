@@ -1,52 +1,46 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-    <!--
-        ===
-        This comment should NOT be removed.
-
-        Charisma v2.0.0
-
-        Copyright 2012-2014 Muhammad Usman
-        Licensed under the Apache License v2.0
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        http://usman.it
-        http://twitter.com/halalit_usman
-        ===
-    -->
-    <title>Sisterhood - Portal</title>
+<!doctype html>
+<!--[if IE 8 ]>
+<html class="ie ie8" lang="en">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]>
+<html lang="en" class="no-js">
+<![endif]-->
+<html lang="en">
+  <head>
+    <!-- Basic -->
+    <title>
+      IKnowWelding
+    </title>
+    <!-- Define Charset -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <!-- Responsive Metatag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Page Description and Author -->
+    <meta name="description" content="welding">
     <meta name="author" content="">
-	<link rel="shortcut icon" href="<?php echo base_url(); ?>/bootstrap/img/makati-seal.ico" type="image/icon"> <link rel="icon" href="<?php echo base_url(); ?>/bootstrap/img/makati-seal.ico" type="image/icon">
-        <link href="<?php echo CSS_PATH; ?>screen.css" rel="stylesheet">
-        <link href="<?php echo CSS_PATH; ?>jquery.weekcalendar.css" rel="stylesheet" id="bs-css">
-        <link href="<?php echo CSS_PATH; ?>bootstrap.min.css" rel="stylesheet" id="bs-css">
-        <link href="<?php echo CSS_PATH; ?>bootstrap-lumen.min.css" rel="stylesheet" id="bs-css">
         
-        <link href="<?php echo CSS_PATH; ?>charisma-app.css" rel="stylesheet">
-        <link href="<?php echo CSS_PATH; ?>jquery.dataTables.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css">
-        <script src="<?php echo JS_PATH; ?>jquery.js"></script>
-        <script src="<?php echo JS_PATH; ?>docs.min.js"></script>	
-        <script src="<?php echo JS_PATH; ?>jquery.dataTables.min.js"></script>
-        <script src="<?php echo JS_PATH; ?>zabuto_calendar.js"></script>
-        <script src="<?php echo JS_PATH; ?>bootstrap-datetimepicker.js"></script>
-        <link href="<?php echo CSS_PATH; ?>sidebar.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>jquery-ui.min.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>jquery-ui.theme.min.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>fullcalendar.print.css" rel="stylesheet" media="print">
-        <link href="<?php echo CSS_PATH; ?>fullcalendar.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>zabuto_calendar.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
-        
-        <link href="<?php echo CSS_PATH; ?>font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>froala_editor.min.css" rel="stylesheet" type="text/css">
-        <link href="<?php echo CSS_PATH; ?>froala_style.min.css" rel="stylesheet" type="text/css">
-        
+	<!-- Bootstrap CSS  -->
+	<link rel="stylesheet" href="<?php echo CSS_PATH; ?>bootstrap.min.css" type="text/css" media="screen">
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="<?php echo FONTS_PATH; ?>font-awesome.min.css" type="text/css" media="screen">
+	<!-- Icon -->
+	<link rel="stylesheet" href="<?php echo CSS_PATH; ?>simple-line-icons.css" type="text/css" media="screen">
+	<!-- ConBiz Iocn -->
+	<link rel="stylesheet" href="<?php echo CSS_PATH; ?>flaticon.css" type="text/css" media="screen">
+	<!-- rs style -->
+	<link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>settings.css" media="screen">
+	<!-- ConBiz CSS Styles  -->
+	<link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>main.css" media="screen">
+	<!-- Responsive CSS Styles  -->
+	<link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>responsive.css" media="screen">
+	<!-- Css3 Transitions Styles  -->
+	<link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>animate.css" media="screen">
+	<!-- Slicknav  -->
+	<link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>slicknav.css" media="screen">
+
+	<!-- Selected Preset -->
+	<link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>yellow.css" media="screen" />
+	
         <title></title>
     </head>
     <body>
@@ -144,37 +138,26 @@
                 enabled to use this site.</p>
         </div>
     </noscript>
-    
-    <script src="<?php echo JS_PATH; ?>bootstrap.min.js"></script>
-    <!-- library for jquery ui -->
-    <script src="<?php echo JS_PATH; ?>jquery-ui.min.js"></script>
-    <!-- library for jquery validation -->
-    <script src="<?php echo JS_PATH; ?>jquery.validate.min.js"></script>
-    <!-- library for cookie management -->
-    <script src="<?php echo JS_PATH; ?>jquery.cookie.js"></script>
-    <!-- calender plugin -->
-    <script src="<?php echo JS_PATH; ?>moment.min.js"></script>
-    <script src="<?php echo JS_PATH; ?>fullcalendar.min.js"></script>
-    <!-- select or dropdown enhancer -->
-    <script src="<?php echo JS_PATH; ?>chosen.jquery.min.js"></script>
-    <!-- plugin for gallery image view -->
-    <script src="<?php echo JS_PATH; ?>jquery.colorbox-min.js"></script>
-    <!-- for iOS style toggle switch -->
-    <script src="<?php echo JS_PATH; ?>jquery.iphone.toggle.js"></script>
-    <!-- star rating plugin -->
-    <script src="<?php echo JS_PATH; ?>jquery.raty.min.js"></script>
-    <!-- multiple file upload plugin -->
-    <script src="<?php echo JS_PATH; ?>jquery.uploadify-3.1.min.js"></script>
-    <!-- application script for Charisma demo -->
-    <script src="<?php echo JS_PATH; ?>charisma.js"></script>
-    <!-- history.js for cross-browser state change on ajax -->
-    <script src="<?php echo JS_PATH; ?>jquery.history.js"></script>
-    
-    <!-- text area editor -->
-    <script src="<?php echo JS_PATH; ?>froala_editor.min.js"></script>
-    <script src="<?php echo JS_PATH; ?>tables.min.js"></script>
+	
+	
+	<!-- Main JS  -->
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery-min.js"></script>      
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>owl.carousel.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>modernizrr.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>nivo-lightbox.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.mixitup.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.appear.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>count-to.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.parallax.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>smooth-scroll.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.slicknav.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>main.js"></script>
 
-    <script src="<?php echo JS_PATH; ?>jquery.MyThumbNail.js"></script>
+    <!-- Revelosition slider js -->
+    <script src="<?php echo JS_PATH; ?>jquery.themepunch.revolution.min.js"></script>
+    <script src="<?php echo JS_PATH; ?>jquery.themepunch.tools.min.js"></script>
     
     </body>
-        
+       
+	   
