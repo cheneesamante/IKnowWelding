@@ -1,176 +1,127 @@
-
-    <div class="templatemo-welcome" id="templatemo-welcome">
+<!-- Start Featured Section -->
+      <div class="featured section">
         <div class="container">
-            <div class="templatemo-slogan text-center">
-                <span class="txt_darkgrey">Welcome to </span><span class="txt_orange">Sisterhood Portal</span>
-                <div>
-                    <p class="txt_slogan"> </p>
-                <p class="txt_slogan">
-                        The City of Makati is one of the cities that comprise the Metropolitan Manila.
-                </p>
-                <p class="txt_slogan"> 
-                        It is the financial capital of the Philippines filled with gigantic buildings, condominiums, five-star hotels, major banks, corporations, department stores as well as foreign embassies. Makati is also known for being a major cultural and entertainment centre in Metro Manila.
-                    The local government of Makati has been in existence for 344 years.  It was transformed from a municipality into a highly urbanized city on January 2, 1995 through Republic Act 7854 with the great support of the residents in a plebiscite held on February 4, 1995.  The reforms implemented by the Mayor are in line with its thrust of installing a local government that is efficient, effective and responsive in delivering the essential services to all Makati constituents.
-                </p>
-                <p class="txt_slogan">
-                        The sisterhood agreement is one of the projects of the Hon. Jejomar C. Binay who was then the mayor of Makati, now the Vice President of the Philippines. A sister city, municipality relationship becomes official with the signing of a formal agreement by the top elected officials approving a long-term partnership between the two communities. Sister city or municipality relationship between Makati, Metro Manila and other provinces and even foreign countries is continuously expanding through the efforts of Hon. Mayor Jejomar Erwin S. Binay, Jr. It aims to further involve the widest possible diversity of exchanges and projects, such as health care, education, economics and business development.  Another is academic exchanges of students whereby they can avail the privileges enjoyed by Makati residents.
-                    The benefits of the sister city or municipality relationship include the following: an air of global perspective with a feeling of welcoming, relax, and at ease visiting various locations of the city, provision of free accommodations by the Makati City government in the Friendship Suite, and an escort service upon their arrival from the airport to the place of their destination and until departure.
-                    Sisterhood agreement merely establishes friendship ties through sharing of experiences and best practices in areas of common interest.
+          <div class="row">            
+            <div class="col-md-6 col-sm-6 col-xl-12">
+              <div class="row main-page-txt">
+                <div class="col-md-12 featured-content">
+			      <h1>JOIN US NOW!</h1>
+				  <br/><br/>
+                  <p id="main-page-txt-build-prof">BUILD YOUR ONLINE PROFILE NOW AND FIND OUT YOUR STAR RANKING!</p>
+				  <p id="main-page-txt-excl">Exclusively open to all welding professionals who are working in the welding industry from very simple welding job to the most advance and complex welding works including the design, production and quality control.</p>
+				  <p><button type="button" class="btn btn-default btn-circle btn-join"><i class="fa fa-plus" aria-hidden="true"></i></button> WHO CAN JOIN</p>
+				  <div id="div-list-join">
+					<ul>
+						<li><i class="fa fa-check-square-o"></i> Welding Trainee / Student</li>
+						<li><i class="fa fa-check-square-o"></i> Welder</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Operator</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Artist</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Inspector</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Leadman</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Foreman</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Supervisor</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Superintendent</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Instructor</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Salesman</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Trainer</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Engineer</li>
+					</ul>
+				  </div>
+				  
+				  <div class="col-md-5 col-sm-5 signup" style="margin-left: 150px;">
+					<a class="btn btn-effect btn-signup" href="signup.html">GET STARTED</a>
+				  </div>
+				</div>
+              </div>
+			  <!-- Start latest Work Posts Widget -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="footer-widget flickr-widget">
+                <ul class="flickr-list">
+                  <li>
+                    <a href="assets/img/work/7.jpg" class="lightbox">
+                    <img alt="" src="assets/img/work/7.jpg">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="assets/img/work/img-2.jpg" class="lightbox">
+                    <img alt="" src="assets/img/work/img-2.jpg">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="assets/img/work/img-3.jpg" class="lightbox">
+                    <img alt="" src="assets/img/work/img-3.jpg">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="assets/img/work/img-4.jpg" class="lightbox">
+                    <img alt="" src="assets/img/work/img-4.jpg">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="assets/img/work/16.jpg" class="lightbox">
+                    <img alt="" src="assets/img/work/16.jpg">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="assets/img/work/13.jpg" class="lightbox">
+                    <img alt="" src="assets/img/work/13.jpg">
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- End latest Work  Widget -->
+            </div>
+			
 
-                </p>
-                </div>
-            </div>	
+            <div class="col-md-6 col-sm-6 col-xl-12">
+              <div class="featured-thumb">
+                <img src="assets/img/featured/img-1.jpg" alt="">
+              </div>
+            </div>
+
+          </div>
         </div>
-    </div>
-
-    <div id="0004" class="templatemo-service">
+      </div>
+      <!-- End Featured Section -->
+  
+  <!-- Start Client Section -->
+      <div class="client section">
         <div class="container">
-            <?php if(isset($sisterhood)){ ?>
-            <?php $ctr = 0; ?>
-             <?php foreach($sisterhood as $program_info=>$program_val): ?>
-             <?php $ctr++; ?>
-                                
-            <div class="row" id="program-list">
-                <div class="col-sm-5 col-md-6">
-                    <div class="templatemo-service-item">
-                        <div>
-                            <?php if($ctr == 1){ ?>
-                            <img style="margin-right: 20px" src="bootstrap/img/program-1.jpg" />
-                            <?php } else if ($ctr == 2){ ?>
-                            <img src="bootstrap/img/program-2.jpg" />
-                            <?php } ?>
-                            <br/>
-                        </div>
-                    </div>
-                    <br style="clear:both" >
-                    <div class="templatemo-service-item">
-                    <span class="templatemo-service-item-header" style="clear:both;"><?php echo $program_val["title"]; ?></span>
-                    <p> <?php echo $program_val["body"]; ?> </p>
-                    </div>
-                    <div class="clearfix"></div>
-                     
-                </div>
-                 <?php endforeach; 
-                 } 
-                 if (count($sisterhood) == 0) {?>
-                    <span class="blog_header"> No Contents Available </span>
-                    <?php } ?>
+          <!-- Start Heading -->
+          <!--<div class="heading">
+            <div class="section-title"></div>              
+          </div>-->
+          <!-- End Heading -->
+          <!-- Some Text -->
+          <div class="sponsor description text-center">
+           <h1>WELDING ENTHUSIAST CAN LEARN ALL ABOUT WELDING TECHNOLOGY HERE</h1>
+          </div>
+          <div class="row sponsor">
+            <div>
+                <div class="well col-md-2 col-sm-2 col-xl-4">
+					<h2>Sponsor Ad 1</h2>
+					<p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum.</p>
+				</div>
+				<div class="well col-md-2 col-sm-2 col-xl-4">
+					<h2>Sponsor Ad 2</h2>
+					<p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum.</p>
+				</div>
+				<div class="well col-md-2 col-sm-2 col-xl-4">
+					<h2>Sponsor Ad 3</h2>
+					<p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum.</p>
+				</div>
+				<div class="well col-md-2 col-sm-2 col-xl-4">
+					<h2>Sponsor Ad 4</h2>
+					<p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum.</p>
+					</p>
+				</div>
+				<div class="well col-md-2 col-sm-2 col-xl-4">
+					<h2>Sponsor Ad 5</h2>
+					<p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum.</p>
+				</div>
             </div>
+          </div>
         </div>
-    </div>
-
-    <div id="sisterhood">
-            <div class="container">
-                <div class="row">
-                    <div class="templatemo-line-header" >
-                        <div class="text-center">
-                            <hr class="team_hr team_hr_left hr_gray"/><span class="txt_darkgrey">SISTER CITIES</span>
-                            <hr class="team_hr team_hr_right hr_gray" />
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div> <!-- /.row -->
-
-                
-                <div class="clearfix"></div>
-                <div class="text-center" id="sisterhood-city-thumbnail">
-                    <ul class="templatemo-project-gallery" >
-                        <?php foreach($cities as $city=>$city_val): ?>
-                        <li class="col-lg-2 col-md-2 col-sm-2">
-                            <a href="<?php echo site_url('common/pages/sister_cities/'.$city_val["city_id"]); ?>">
-                                <div class="templatemo-project-box">
-                                    <img src="<?php echo CITY_IMG_PATH.$city_val["city_img"]; ?>" class="img-responsive" />
-                                    <div class="project-overlay">
-                                        <h5><?php echo $city_val["city_name"]; ?></h5>
-                                        <hr />
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul><!-- /.gallery -->
-                </div>
-                <div class="clearfix"></div>
-                <?php
-                 if (count($cities) == 0) {?>
-                    <span class="blog_header"> No Contents Available </span>
-                    <?php } ?>
-            </div><!-- /.container -->
-        </div> <!-- /.templatemo-portfolio -->
-
-        <div id="events" class="tabs-item">
-            <div class="container">
-                <div class="row">
-                    <div class="templatemo-line-header head_contact">
-                        <div class="text-center">
-                            <hr class="team_hr team_hr_left hr_gray"/><span class="txt_darkgrey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVENTS&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <hr class="team_hr team_hr_right hr_gray" />
-                        </div>
-                    </div>
-                    
-                </div> <!-- /.row -->
-                <div class="center-block" style="max-width:600px;">
-                <div id="calendar"></div>
-                    <?php  $this->load->view('events_view'); ?>
-                    
-                </div>
-                
-                <div class="clearfix"></div>
-            
-        </div>
-            
-            </div>
-        
-        <div id="news">
-            <div class="container">
-                <div class="row">
-                    <div class="templatemo-line-header" style="margin-top: 0px;" >
-                        <div class="text-center">
-                            <hr class="team_hr team_hr_left hr_gray"/><span class="span_blog txt_darkgrey">NEWS</span>
-                            <hr class="team_hr team_hr_right hr_gray" />
-                        </div>
-                    </div>
-                    <br class="clearfix"/>
-                </div>
-                
-                <div class="blog_box">
-                    <?php if(isset($news)){ ?>
-                    <?php foreach($news as $news_info=>$news_val): ?>
-                    <div class="col-sm-5 col-md-6 blog_post">
-                        <ul class="list-inline">
-                            <li class="col-md-4">
-                                <?php if(isset($news_val["news_img"])): ?>
-                                <a>
-                                    <img class="img-responsive" src="<?php echo NEWS_IMG_PATH.$news_val["news_img"]; ?>" />
-                                </a>
-                                <?php endif; ?>
-                            </li>
-                            <li  class="col-md-8">
-                                <div class="pull-left">
-                                    <span class="blog_header"><?php echo strtoupper($news_val["news_title"]); ?></span><br/>
-                                    <span>Posted on : <?php echo date("F j, Y", strtotime($news_val["news_date"])); ?> </span>
-                                </div>
-
-                                <div class="clearfix"> </div>
-                                <p class="blog_text">
-                                    <?php echo substr(strip_tags($news_val["news_body"]), 0, 75); ?>
-                                    <?php echo strlen(strip_tags($news_val["news_body"])) > 75 ? '[...]' : '' ; ?>
-                                </p>
-                                <div class="pull-right">
-                                    <a class="btn btn-blue" href="<?php echo site_url('common/pages/news/'.$news_val["news_id"]); ?>" 
-                                       role="button">READ MORE>>></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> <!-- /.blog_post 1 -->
-                    <?php endforeach; 
-                    } 
-                    if (count($news) == 0) { ?>
-                    <span class="blog_header"> No News Available </span>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-        
-       
-</div>
+      </div>
+      <!-- End Client Section -->

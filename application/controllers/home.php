@@ -58,7 +58,55 @@ class Home extends CI_Controller {
 		$this->load->view('home_view');
 	}       
 		$this->load->view('footer');
-    }        
+    } 
+
+	public function signup()
+	{
+                  $view = 'signup_view';
+				
+                $data['menu'] = $this->common->_menu();
+		$events = $this->common_model->view_events();		
+		$data['cities'] = $this->common_model->get_sister_cities_information();	
+        $data['load_events'] = json_encode($events); 
+                $data['news'] = $this->common_model->get_news_information();	
+                $data['sisterhood'] = $this->common_model->get_sisterhood_network_information();	
+             //   var_dump($this->session->userdata);
+                if($this->session->userdata('info')['user_id']&& $this->session->userdata('info')['user_type_id']){
+                  $sess_user_type_id = $this->session->userdata('info')['user_type_id'];
+                  $check_view = $this->common->_get_view($sess_user_type_id);
+                  $view = $check_view;
+                  $data['menu'] = $this->common->_menu($sess_user_type_id);
+                            //check user_type 
+            if($view == "admin/home_view"){
+              $sess_user_type_id = $this->session->userdata('info')['user_id'];
+             $this->load->model('mahana_model', 'message');
+             $data['recent_sent_msg'] = $this->message->_recent_sent_message($sess_user_type_id);
+             $data['recent_msg'] = $this->message->_recent_message($sess_user_type_id);
+             $data['admin_cnt'] = $this->common_model->_count_user(ADMIN);
+             $data['ird_cnt'] = $this->common_model->_count_user(IRD_EMP);
+             $data['sister_cnt'] = $this->common_model->_count_user(SISTER_LGU);
+             $data['today_reserve'] = $this->reserve->_today_reserve();
+             $data['my_reserve'] = $this->reserve->_my_reservation($sess_user_type_id);
+            } elseif($view == "ird/home_view"){
+               $sess_user_type_id = $this->session->userdata('info')['user_id'];
+             $this->load->model('mahana_model', 'message');
+             $data['recent_sent_msg'] = $this->message->_recent_sent_message($sess_user_type_id);
+             $data['recent_msg'] = $this->message->_recent_message($sess_user_type_id);
+             $data['admin_cnt'] = $this->common_model->_count_user(ADMIN);
+             $data['ird_cnt'] = $this->common_model->_count_user(IRD_EMP);
+             $data['sister_cnt'] = $this->common_model->_count_user(SISTER_LGU);
+             $data['today_reserve'] = $this->reserve->_today_reserve();
+             $data['my_reserve'] = $this->reserve->_my_reservation($sess_user_type_id);
+            }
+                  $this->load->view('header_main',$data);
+                  $this->load->view($view,$data);
+                } else {
+		$this->load->view('header',$data);
+		$this->load->view('signup_view');
+	}       
+		$this->load->view('footer');
+    } 
+	
 //    private function menu($param_user_type_id = null){
 //        try {
 //            $result = false;

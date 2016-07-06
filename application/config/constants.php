@@ -7,14 +7,15 @@ function get_base_url() {
 }
 
 // $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,strpos( $_SERVER["SERVER_PROTOCOL"],'/'))).'://';
-define('CSS_PATH', get_base_url().'/bootstrap/css/');
-define('JS_PATH', get_base_url().'/bootstrap/js/');
-define('UPLOAD_IMG_PATH', get_base_url().'/bootstrap/upload/');
-define('CITY_IMG_PATH', get_base_url().'/bootstrap/cities/'); // FOR Sister city upload
-define('NEWS_IMG_PATH', get_base_url().'/bootstrap/news/'); // FOR News upload
-define('DEFAULT_IMG_PATH', get_base_url().'/bootstrap/upload/default.png'); // For Default images
+define('CSS_PATH', get_base_url().'/assets/css/');
+define('FONTS_PATH', get_base_url().'/assets/fonts/');
+define('JS_PATH', get_base_url().'/assets/js/');
+define('UPLOAD_IMG_PATH', get_base_url().'/assets/upload/');
+define('CITY_IMG_PATH', get_base_url().'/assets/cities/'); // FOR Sister city upload
+define('NEWS_IMG_PATH', get_base_url().'/assets/news/'); // FOR News upload
+define('DEFAULT_IMG_PATH', get_base_url().'/assets/upload/default.png'); // For Default images
 // define('JS_PATH',  'http://makatisisterhood.com/bootstrap/js/');
-//define('JS_PATH',  base_url().'/bootstrap/js/');
+//define('JS_PATH',  base_url().'/assets/js/');
 
 
 /*

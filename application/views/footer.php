@@ -1,119 +1,127 @@
-</div>
-    <div class="templatemo-footer" >
-            <div class="container">
-                <?php if(!isset($this->session->userdata('menu')['who'])){ ?>
-                <div class="row"> 
-                    <div class="text-center">
-                        <div class="footer_container">
-                            <ul class="nav navbar-nav list-inline">
-                            <?php foreach ($menu['up'] as $key_menu => $val_menu): ?>
-                                <?php 
-                                    $class = isset($class) ? '' : 'active' ;
-                                    $href = explode("/", $val_menu[1]); 
-                                    $page = $href[count($href) - 1];
-
-                                    $link = $val_menu[0] == 'City of Makati' ? 
-                                        'rel="nofollow" href="http://www.makati.gov.ph" class="external-link"' : 
-                                        "href=#".$page ;
-                                ?>
-                                <li>
-                                    <a <?php echo $link; ?>>
-                                        <?php echo strtoupper($val_menu[0]); ?> 
-                                    </a>
-                                </li>
-                                <?php endforeach; ?>
-                            </ul>
-                    </div>
-                </div>
-                <?php } ?>
-                <div class="row">
-                    <div class="text-center">
-
-                        <div class="footer_container">
-                            <div class="height30 footer_container"></div>
-                        </div>
-                        <div class="footer_bottom_content">
-                            <?php 
-                            $copyright = 'Copyright &copy 2014 <a href="#"> Sisterhood - Portal </a>' ;
-                            if(isset($this->session->userdata('menu')['who'])){
-                                    echo '<hr>';
-                            }
-                            echo $copyright;
-                            ?>
-                        </div>
-                        
-                    </div>
-                </div>
+      <!-- Start Footer Section -->
+      <footer>
+        <div class="container">
+          <div class="row footer-widgets">
+            <!-- Start Contact Widget -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="footer-widget contact-widget">
+                <h4>
+                  ABOUT US
+                </h4>
+                <p class="txt-justified">
+					UNIQUE FROM OTHER SOCIAL NETWORK WEBSITE. 
+					THIS WEBSITE IS DESIGN TO PROVIDE AUTOMATIC STAR RANKING BASED ON THE INFORMATION YOU PROVIDED AFTER
+					COMPLETING YOUR ONLINE PROFILE.
+				</p>
+				<p>LEARN THE CRITERIA FOR RANKING <a>HERE</a>.</p>
+              </div>
             </div>
+            <!-- End Contact Widget -->
+
+            
+			<div class="col-md-1 col-sm-3 col-xs-5"></div>
+            <!-- Start Address Widget -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="footer-widget">
+                <h4>
+                  OUR CONTACT
+                </h4>
+                <ul class="address">
+                  <li>
+                    <a href="#"><i class="fa fa-envelope"></i> EMAIL: info@iknowwelding.com</a>
+					<a href="#"><i class="fa"></i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+					&nbsp; &nbsp; &nbsp; &nbsp; support@iknowwelding.com</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- End Address Widget -->
+
+			<div class="col-md-1 col-sm-3 col-xs-5"></div>
+            <!-- Start Text Widget -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="footer-widget hours-widget">
+                <h4>
+                  PRIVACY
+                </h4>
+              </div>
+            </div>
+            <!-- End Text Widget -->
+
+          </div>
+          <!-- .row -->        
         </div>
-</body>
+      </footer>
+      <!-- End Footer Section -->
+
+      <!-- Start Copyright -->
+      <div class="copyright-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>
+                Copyright &copy; 2015 IKnowWelding 
+				<!-- - Designed & Developed by 
+                <a href="http://graygrids.com"> 
+                GrayGrids -->
+                </a>
+              </p>
+            </div>
+          </div>
+          <!-- .row -->
+        </div>
+      </div>
+      <!-- End Copyright -->
+    </div>
+    <!-- End Full Body Container -->
+	
+	    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Start Loader -->
+    <div id="loader">
+      <div class="square-spin">
+        <div></div>
+      </div>
+    </div>
+	
+	   
+	<!-- Main JS  -->
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery-min.js"></script>      
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>owl.carousel.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>modernizrr.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>nivo-lightbox.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.mixitup.min.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.appear.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>count-to.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.parallax.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>smooth-scroll.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.slicknav.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>main.js"></script>
+
+    <!-- Revelosition slider js -->
+    <script src="<?php echo JS_PATH; ?>jquery.themepunch.revolution.min.js"></script>
+    <script src="<?php echo JS_PATH; ?>jquery.themepunch.tools.min.js"></script>
+    </body>
 </html>
 <script>
-	$(function(){
-	  $('.textarea-custom').editable({placeholder: '', inlineMode: false, buttons: ['undo', 'redo', 'sep', 'bold', 'italic', 'underline', 'strikeThrough', 'sep',
-	  'fontSize', 'table', 'createLink', 'formatBlock', 'align', 'insertOrderedList', 'insertUnorderedList', 'sep', 'outdent', 'indent', 'selectAll',
-	  'formatBlock', 'alert', 'clear', 'color' ]});		  
-	});	
-	
-	
-	<?php
-	if(!isset($this->session->userdata('info')['first_name'])){
-    ?>
-        $("#sisterhood-city-thumbnail img").MyThumbnail({
-            thumbWidth:185,
-            thumbHeight:120,
-            backgroundColor:"#ccc",
-            imageDivClass:"sisterhood"
-        });
-        $("#program-list img").MyThumbnail({
-            thumbWidth:360,
-            thumbHeight:230,
-            backgroundColor:"#ccc",
-            imageDivClass:"program"
-        });
-        
-        $("#news-preview img").MyThumbnail({
-            thumbWidth:150,
-            thumbHeight:150,
-            backgroundColor:"#ccc",
-            imageDivClass:"news"
-        });
-        
-        $("#extruderTop").buildMbExtruder({
-            positionFixed:false,
-            width:350,
-            extruderOpacity:1,
-            //autoCloseTime:4000,
-            closeOnExternalClick:false,
-            hidePanelsOnClose:false,
-            onExtOpen:function(){},
-            onExtContentLoad:function(){},
-            onExtClose:function(){}
-          });
-      
-        $(document).ready(function() {
-            $('.pgwSlider').pgwSlider({maxHeight : 200});
-        });
+	$(function() {
+		$('[data-toggle="popover"]').popover();
+		$('#div-list-join').hide();
+		$('.btn-join').click(function () {
+			if($('#div-list-join').is(":visible")){
+				$('#div-list-join').fadeOut('slow');
+			} else {
+				$('#div-list-join').hide();
+				$('.btn-join').animate('slow',function(){
+					$('#div-list-join').fadeIn('slow');
+				});
+			}
+				
+		});
 		
-        
-		
-	<?php
-	}
-    ?>
-        
-        $('.modal') 
-	.on('shown', function(){ 
-	  $('body').css({overflow: 'hidden'}); 
-	}) 
-	.on('hidden', function(){ 
-	  $('body').css({overflow: ''}); 
 	});
-        
-        $("#sisterhood-city-preview img").MyThumbnail({
-            thumbWidth:250,
-            thumbHeight:230,
-            backgroundColor:"#ccc",
-            imageDivClass:"image_preview"
-        });
-
-</script>	
+</script>
