@@ -29,7 +29,7 @@
 				  </div>
 				  
 				  <div class="col-md-5 col-sm-5 signup" style="margin-left: 150px;">
-					<a class="btn btn-effect btn-signup" href="signup.html">GET STARTED</a>
+					<a class="btn btn-effect btn-signup" href="<?php echo base_url(); ?>home/signup">GET STARTED</a>
 				  </div>
 				</div>
               </div>

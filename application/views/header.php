@@ -110,30 +110,22 @@
               <!-- Start Navigation List -->
               <ul class="nav navbar-nav navbar-right">
 				<li>
-                  <a class="active" href="index.html">
-                  Home
-                  </a>
-                </li>
-                <li>
-                  <a href="features.html">
-                  About
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                  Articles
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                  Profiles
-                  </a>
-                </li>
-				<li>
-                  <a href="#">
-                  Contact Us
-                  </a>
-                </li>
+				<?php 
+					if($menu):
+						foreach($menu as $m):
+							echo "<li>
+								  <a href='".get_base_url().$m['link']."'>
+								  ".$m['name']."
+								  </a>
+								</li>";
+						endforeach;		
+					else: ?>
+					<li>
+					  <a class="active" href="/home">
+					  Home
+					  </a>
+					</li>
+				<?php endif; ?>
               </ul>
               <!-- End Navigation List -->
             </div>
@@ -142,30 +134,22 @@
           <!-- Mobile Menu Start -->
           <ul class="wpb-mobile-menu">
 			<li>
-			  <a class="active" href="index.html">
-			  Home
-			  </a>
-			</li>
-			<li>
-			  <a href="features.html">
-			  About
-			  </a>
-			</li>
-			<li>
-			  <a href="#">
-			  Articles
-			  </a>
-			</li>
-			<li>
-			  <a href="#">
-			  Profiles
-			  </a>
-			</li>
-			<li>
-			  <a href="#">
-			  Contact Us
-			  </a>
-			</li>
+			<?php 
+				if($menu):
+					foreach($menu as $m):
+						echo "<li>
+							  <a href='".get_base_url().$m['link']."'>
+							  ".$m['name']."
+							  </a>
+							</li>";
+					endforeach;		
+				else: ?>
+				<li>
+				  <a class="active" href="/home">
+				  Home
+				  </a>
+				</li>
+			<?php endif; ?>
           </ul>
           <!-- Mobile Menu End -->
 

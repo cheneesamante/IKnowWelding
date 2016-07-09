@@ -6,6 +6,26 @@ class Common_model extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
+	
+	public function get_menu($category = NULL){
+		$data = false;
+		try{
+            $sql = 'SELECT * FROM menu';
+			if(!is_null($category)){
+				$sql .= " WHERE category = '".$category."'";
+			}
+            $sql .= " ORDER BY ord";
+            
+            $qry = $this->db->query($sql);
+            if ($qry->num_rows() > 0) {
+                $data = $qry->result_array();			
+			}
+			
+			return $data;
+		} catch (Exception $ex) {
+			return $data;
+		}
+	}
 
     public function check_datetime($param_event_time = null, $param_user_id = null) {
        $data = false;

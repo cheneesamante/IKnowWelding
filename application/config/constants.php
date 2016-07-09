@@ -14,9 +14,12 @@ define('UPLOAD_IMG_PATH', get_base_url().'/assets/upload/');
 define('CITY_IMG_PATH', get_base_url().'/assets/cities/'); // FOR Sister city upload
 define('NEWS_IMG_PATH', get_base_url().'/assets/news/'); // FOR News upload
 define('DEFAULT_IMG_PATH', get_base_url().'/assets/upload/default.png'); // For Default images
-// define('JS_PATH',  'http://makatisisterhood.com/bootstrap/js/');
-//define('JS_PATH',  base_url().'/assets/js/');
 
+
+define('ADMIN_BOOTSTRAP_PATH', get_base_url().'/assets/admin/bootstrap/');
+define('ADMIN_BUILD_PATH', get_base_url().'/assets/admin/build/');
+define('ADMIN_DIST_PATH', get_base_url().'/assets/admin/dist/');
+define('ADMIN_PLUGIN_PATH', get_base_url().'/assets/admin/plugins/');
 
 /*
 |--------------------------------------------------------------------------
