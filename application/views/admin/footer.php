@@ -1,8 +1,12 @@
-      
-    <!-- jQuery 2.1.4 -->
-    <script src="<?php echo ADMIN_PLUGIN_PATH; ?>jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="<?php echo ADMIN_BOOSTRAP_PATH; ?>js/bootstrap.min.js"></script>
+    
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+              <b>Version</b> 0.0.1
+            </div>
+            <strong>Copyright &copy; 2016 IknowWelding</strong> All rights reserved.
+        </footer>
+        <div class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
     <!-- DataTables -->
     <script src="<?php echo ADMIN_PLUGIN_PATH; ?>datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo ADMIN_PLUGIN_PATH; ?>datatables/dataTables.bootstrap.min.js"></script>
@@ -10,20 +14,8 @@
     <script src="<?php echo ADMIN_PLUGIN_PATH; ?>slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo ADMIN_PLUGIN_PATH; ?>fastclick/fastclick.min.js"></script>
+    <!-- CK Editor -->
+    <script src="<?php echo ADMIN_PLUGIN_PATH; ?>ckeditor/ckeditor.js"></script>
 
-    <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
-    </script>
   </body>
 </html>

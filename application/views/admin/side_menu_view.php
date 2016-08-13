@@ -11,7 +11,7 @@
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
             </div>
           </div>
           <!-- search form -->
@@ -29,7 +29,7 @@
             <li class="header">MAIN NAVIGATION</li>
             <?php foreach($menu as $m): ?>
                 <li>
-                    <a href="<?php echo $m['link']; ?>">
+                    <a href="<?php echo site_url($m['link']); ?>">
                         <i class="fa fa-dashboard"></i> <span><?php echo $m['name']; ?></span>
                     </a>
                 </li>

@@ -95,7 +95,7 @@
 					<div><input type="radio" class="with-font indent" id="international3" value="" name="membership"><label for="international3" class="light">Others</label></div>
                     <div class="indent-choices">
                         <label for="" class="light">Specify:</label>
-                        <input type="text" name="" required="true" id="international-others"/>
+                        <input type="text" name="" required="true" id="international-others" />
                     </div><br>
 				</div>
 				<label for="local" class="indent">Local/National</label>
@@ -103,12 +103,15 @@
 					<div><input type="radio" class="with-font indent" id="local" value="" name="membership"><label for="local" class="light">Specify:</label>
                     <input type="text" name="" required="true" id="local"/></div><br>
 				</div>
-				           
-				<button id="submit" class="btn btn-signup-form" type="submit" style="pointer-events: all; cursor: pointer;">
-					<i class="fa fa-check"></i>
-						SIGN UP
-				</button>
-			
+                                <br/>
+				 <div class="text-center">By clicking Sign up, you agree to IknowWelding's <a>User Agreement</a> and <a>Privacy Policy</a>.</div>
+                                 <div class="text-center">
+                                    <br/>
+                                    <button id="submit" class="btn btn-signup-form" type="submit" style="pointer-events: all; cursor: pointer;">
+                                           <i class="fa fa-arrow-circle-right"></i> SIGN UP
+                                    </button>
+                                 </div>
+                                 <br/>
 				</form>
 			</div>
 			</div>

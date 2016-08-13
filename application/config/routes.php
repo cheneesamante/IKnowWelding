@@ -40,6 +40,9 @@
 
 $route['default_controller'] = "home";
 $route['404_override'] = '';
+$route['menu/(:any)'] = 'home/index/$1'; 
+$route['signup'] = 'home/signup'; 
+
 //$route['common/pages'] = "index/$1";
 //$route['common'] = "$1";
 //$route['admin'] = "$1";

@@ -8,8 +8,9 @@
 		<!-- Responsive Metatag -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<!-- Page Description and Author -->
-		<meta name="description" content="welding">
-		<meta name="author" content="">
+                <meta name="description" content="Welcome to IknowWelding - A social networking website exclusively open to all welding professionals who are working in the welding industry from very simple welding job to the most advance and complex welding works including the design, production and quality control. ">
+		<meta name="keywords" content="welding, social network, ranking, welder">
+                <meta name="author" content="">
 		
 		<!-- Bootstrap CSS  -->
 		<link rel="stylesheet" href="<?php echo CSS_PATH; ?>bootstrap.min.css" type="text/css" media="screen">
@@ -110,22 +111,22 @@
               <!-- Start Navigation List -->
               <ul class="nav navbar-nav navbar-right">
 				<li>
+					<li>
+						<a class="active" href="<?php echo site_url('/home'); ?>">
+							Home
+						</a>
+					</li>
 				<?php 
 					if($menu):
 						foreach($menu as $m):
 							echo "<li>
-								  <a href='".get_base_url().$m['link']."'>
-								  ".$m['name']."
+								  <a href='". site_url('/menu/'.$m['page_name']) ."'>
+								  ".$m['title']."
 								  </a>
 								</li>";
 						endforeach;		
-					else: ?>
-					<li>
-					  <a class="active" href="/home">
-					  Home
-					  </a>
-					</li>
-				<?php endif; ?>
+				     endif; 
+				     ?>
               </ul>
               <!-- End Navigation List -->
             </div>

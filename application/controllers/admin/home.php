@@ -9,6 +9,8 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->library('common');
         $this->load->model('common_model');
+        $this->load->model('users_model', 'Users');
+        $this->load->helper('url');
         // Your own constructor code
     }
 
@@ -20,7 +22,10 @@ class Home extends CI_Controller {
         $this->load_view('users_view');
     }  
 
-
+    public function cms(){
+    	$this->load_view('cms_view');
+    }
+    
     public function load_view($view){
         $data['menu'] = $this->common_model->get_menu('ADMIN');
         $this->load->view('admin/header_main');
@@ -29,7 +34,6 @@ class Home extends CI_Controller {
         $this->load->view('admin/footer');
     
     }
-
 }
 
 /* End of file welcome.php */

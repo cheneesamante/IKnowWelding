@@ -14,13 +14,13 @@ class Login extends CI_Controller {
      }
 
     public function index() {
-         //$this->authentication();
-		 $this->load->view('admin/header');
-		 $this->load->view('admin/login_view');
+        //$this->authentication();
+		$this->load->view('admin/header');
+		$this->load->view('admin/login_view');
      }
      
      public function display() {
-         $this->load->view('login_box');
+        $this->load->view('login_box');
      }
      
      public function check() {

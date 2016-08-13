@@ -1,5 +1,5 @@
 <?php
-class Admin_model extends CI_Model {
+class Users_model extends CI_Model {
 
     public function __construct() {
         // Call the Model constructor
@@ -26,6 +26,23 @@ class Admin_model extends CI_Model {
                 }
 		return $data;
 	}
+        
+    public function get_user_info($id){
+        
+        $info = array();
+
+        $sql = 'SELECT * FROM user_info WHERE user_id = ' . $id;
+
+        $qry = $this->db->query($sql);
+        
+        if($qry->num_rows() > 0) {
+            $info = $qry->row();
+        }
+        
+        $data = $info;			
+
+        return $data;
+    }
     
     public function check_email_exists($email, $id = null) {
 
@@ -65,19 +82,26 @@ class Admin_model extends CI_Model {
     public function get_cms($search = NULL, $order = NULL, $limit = NULL){
         $data = array();
 
-        $sql = 'SELECT cms_id, page_name, title, ord, body, reg_date, update_date, active, '
-                . 'IF (active = 1, "active", "inactive") as active_desc  '
-                . 'FROM cms ';
+        $sql = 'SELECT cms_id, page_id, page_name, title, body, reg_date, active, '
+                . 'IF (active = 1, "active", "inactive") as active_desc,  '
+                . 'CASE page_id '
+                . '    WHEN 0001 THEN "Makati Sister City Program" '
+                . '    WHEN 0002 THEN "Other Local Government"  '
+                . '    WHEN 0003 THEN "City of Makati" '
+                . '    WHEN 0004 THEN "Makati Sisterhood Network" '
+                . '    WHEN 0005 THEN "List of Makati Sisterhood" '
+                . '  END as page_name_desc '
+                . 'FROM cms';
 
-        $sql .= !is_null($search) ? ' WHERE ' . $search:  "";
-        //$sql .=!is_null($order) ? $order : "";
-        $sql .=!is_null($limit) ? $limit : "";
-        
+        $sql .= !is_null($search) ? $search:  "";
+        $sql .= !is_null($order) ? $order:  "";
+        $sql .= !is_null($limit) ? $limit:  "";
+
         $qry = $this->db->query($sql);
 
-        if ($qry->num_rows() > 0) {
-            $info = $qry->result_array();
-            $data = $info;
+        if($qry->num_rows() > 0) {
+                $info = $qry->result_array(); 
+                 $data = $info;			
         }
         return $data;
     }
@@ -96,20 +120,18 @@ class Admin_model extends CI_Model {
         }
         return $data;
     }
-    public function count_sister_cities($search = NULL) {
-        $data = array();
+    
+    public function get_active_cms($search = NULL){
+        $info = array();
 
-        $sql = 'SELECT count(*) as total  FROM sister_cities city '
-             . 'LEFT JOIN user_info user ON city.last_updated_by = user.user_id '
-             . 'LEFT JOIN user_info created ON city.user_id = created.user_id ';
-        $sql .=!is_null($search) ? $search : "";
+        $sql = 'SELECT * FROM cms WHERE active = 1 ';
+        $sql .= !is_null($search) ? $search:  "";
 
         $qry = $this->db->query($sql);
 
-        if ($qry->num_rows() > 0) {
-            $info = $qry->row();
-            $data = $info;
-        }
+        $info = $qry->row(); 
+        $data = $info;			
+
         return $data;
     }
     
@@ -131,11 +153,7 @@ class Admin_model extends CI_Model {
     public function view_users($search = NULL, $order = NULL, $limit = NULL){
                 $data = array();
                
-		$sql = 'SELECT user_id, username, email_address, first_name, last_name, middle_name, '
-                        . 'DATE_FORMAT(birthdate, "%Y-%m-%d") as birthdate, gender, user_type_id, active, '
-                        . 'IF (active = 1, "active", "inactive") as active_desc, '
-                        . 'IF (user_type_id = 1, "Administrator", IF (user_type_id = 2, "IRD", "N/A")) '
-                        . 'as user_type_desc  FROM user_info';
+		$sql = 'SELECT user_id, username, email_address, first_name, last_name, reg_date, active FROM user_info';
                 
                 $sql .= !is_null($search) ? $search:  "";
                 $sql .= !is_null($order) ? $order:  "";
@@ -165,6 +183,23 @@ class Admin_model extends CI_Model {
         	return $data;
     }   
     
+    public function count_news($search = NULL) {
+        $data = array();
+
+        $sql = 'SELECT count(*) as total  FROM news '
+             . 'LEFT JOIN user_info user ON news.last_updated_by = user.user_id '
+             . 'LEFT JOIN user_info created ON news.user_id = created.user_id ';
+        $sql .=!is_null($search) ? $search : "";
+
+        $qry = $this->db->query($sql);
+
+        if ($qry->num_rows() > 0) {
+            $info = $qry->row();
+            $data = $info;
+        }
+        return $data;
+    }  
+       
     public function save_user($param_array = array()) {
         if (count($param_array) > 0) {
 
@@ -281,11 +316,11 @@ class Admin_model extends CI_Model {
 		    $result_user_info = null;
 		    if(null != $param_data or !empty($param_data)){
 	            $user_info = array(
-                    'active' => $param_data['action'],					
+                    'active' => $param_data['status'],					
                     'update_date' =>  date('Y-m-d H:i:s')
                 );
 
-			$this->db->where('user_id', $param_data['user_id']);
+			$this->db->where('user_id', $param_data['id']);
 		        $this->db->update('user_info', $user_info); 
 		        if($this->db->affected_rows() > 0) {
 			        $result_user_info = true;			
@@ -309,6 +344,35 @@ class Admin_model extends CI_Model {
 			$info = $qry->result_array(); 
                         $data = $info[0];			
 		}
+        return $data;
+    }
+    
+    //view each sister city
+    public function view_sister_city($param_city_id = null){
+        $data = array();
+
+        $sql = 'SELECT * FROM sister_cities LEFT JOIN markers 
+		ON sister_cities.marker_id = markers.id where sister_cities.city_id = ?  ';
+
+            $qry = $this->db->query($sql, array($param_city_id));
+            if($qry->num_rows() > 0) {
+                    $info = $qry->result_array(); 
+                    $data = $info[0];			
+            }
+        return $data;
+    }
+    
+    //view each news
+    public function view_news($param_news_id = null){
+        $data = array();
+
+        $sql = 'SELECT * FROM news where news_id = ?  ';
+
+            $qry = $this->db->query($sql, array($param_news_id));
+            if($qry->num_rows() > 0) {
+                    $info = $qry->result_array(); 
+                    $data = $info[0];			
+            }
         return $data;
     }
     
@@ -358,6 +422,31 @@ class Admin_model extends CI_Model {
 		
 		return $result_user_info;
    }
+   
+    public function update_city_status($param_data = null){
+        try {
+                $result_city_info = null;
+                if(null != $param_data or !empty($param_data)){
+                    $user_info = array(
+                        'active' => $param_data['action'],					
+                        'update_date' =>  date('Y-m-d H:i:s'),
+                        'last_updated_by' => $this->session->userdata('info')['user_id']
+                    );
+
+                    $this->db->where('city_id', $param_data['city_id']);
+                    $this->db->update('sister_cities', $user_info); 
+                    if($this->db->affected_rows() > 0) {
+                        $result_city_info = true;			
+                    }		
+                }	   
+        } catch (Exception $e) {
+            $result_city_info = false;
+        }
+        
+        echo $this->db->last_query();
+		
+        return $result_city_info;
+    }
    
    public function reset_user_password($param_data = null){
       try {
@@ -442,7 +531,123 @@ class Admin_model extends CI_Model {
         return $data;
     }
 
+    //check markers
+    public function check_markers() {
+        $data = array();
+        $sql = 'SELECT * from markers where 1';
 
+        $qry = $this->db->query($sql);
+        if ($qry->num_rows() > 0) {
+            $info = $qry->result_array();
+        }
+        return $info;
+    }
+
+    public function save_marker($param_array = array()) {
+        if (count($param_array) > 0) {
+
+            $data = array(
+                'name' => $param_array['name'],
+                'address' => $param_array['address'],
+                'city' => $param_array['city'],
+                'lat' => $param_array['lat'],
+                'lng' => $param_array['lng']
+            );
+            $this->db->insert('markers', $data);
+        }
+        $result_id = ($this->db->affected_rows() != 1) ? false :
+                $id = $this->db->insert_id();
+
+        if ($result_id) {
+            return $id;
+        }
+        return $result_id;
+    }
+
+    public function save_add_city($param_array = array()) {
+        if (count($param_array) > 0) {
+
+            $data = array(
+                'user_id' => $param_array['user_id'],
+                'city_name' => $param_array['city_name'],
+                'city_description' => $param_array['city_description'],
+                'reg_date' => $param_array['reg_date'],
+                'marker_id' => $param_array['marker_id'],
+                'city_img' => $param_array['sister_image']
+            );
+            $this->db->insert('sister_cities', $data);
+        }
+        $result_id = ($this->db->affected_rows() != 1) ? false :
+                true;
+        return $result_id;
+    }
+    
+    public function update_city($param_array = array()) {
+        if (count($param_array) > 0) {
+
+            $data = array(
+                'last_updated_by' => $param_array['last_updated_by'],
+                'city_name' => $param_array['city_name'],
+                'city_description' => $param_array['city_description'],
+                'update_date' => $param_array['update_date'],
+                'marker_id' => $param_array['marker_id']
+            );
+            
+            $this->db->where('city_id', $param_array['city_id']);
+            $this->db->update('sister_cities', $data);
+        }
+    
+        $result_id = ($this->db->affected_rows() != 1) ? false :
+                true;
+        return $result_id;
+    }
+    
+    
+    
+    public function update_news($param_array = array()) {
+        if (count($param_array) > 0) {
+
+            $data = array(
+                'last_updated_by' => $param_array['last_updated_by'],
+                'news_title' => $param_array['news_title'],
+                'news_summary' => $param_array['news_summary'],
+                'news_body' => $param_array['news_body'],
+                'news_date' => $param_array['news_date'],
+                'update_date' => $param_array['update_date'],
+            );
+            
+            $this->db->where('news_id', $param_array['news_id']);
+            $this->db->update('news', $data);
+        }
+    
+        $result_id = ($this->db->affected_rows() != 1) ? false :
+                true;
+        return $result_id;
+    }
+
+    //delete marker
+    public function delete_marker($param_lat, $param_lng) {
+        $result = false;
+        $this->db->where('lat', $param_lat);
+        $this->db->where('lng', $param_lng);
+        $this->db->delete('markers');
+        if ($this->db->affected_rows() > 0) {
+            $result = true;
+        }
+        return $result;
+    }
+    //check password
+    public function check_city_name($param_city_name = null) {
+        $data = 'City name already exist!';
+        $city_name = strtolower($param_city_name);
+        $sql = 'SELECT city_name from sister_cities where city_name = ? limit 1';
+
+        $qry = $this->db->query($sql, array('city_name'=>$city_name));
+        if ($qry->num_rows() == 0) {
+            $data = true;
+        }
+        return $data;
+    }    
     //save file name path
     public function save_file($param_data = null) {
         try {
@@ -464,7 +669,23 @@ class Admin_model extends CI_Model {
 
 
     }        
+    //Added cities in 
+    public function add_cities() {
+        try {
+        $data = array();
 
+        $sql = 'SELECT * FROM sister_cities where active = 1';
+
+        $qry = $this->db->query($sql);
+        if ($qry->num_rows() > 0) {
+            $data = $qry->result_array();
+        }
+        return $data;
+        
+        } catch (Exception $e) {
+            return false;
+        }
+    }        
       public function update_get_img($param_array = null) {
         $data = null;
         

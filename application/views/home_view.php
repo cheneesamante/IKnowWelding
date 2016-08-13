@@ -12,24 +12,34 @@
 				  <p><button type="button" class="btn btn-default btn-circle btn-join"><i class="fa fa-plus" aria-hidden="true"></i></button> WHO CAN JOIN</p>
 				  <div id="div-list-join">
 					<ul>
-						<li><i class="fa fa-check-square-o"></i> Welding Trainee / Student</li>
 						<li><i class="fa fa-check-square-o"></i> Welder</li>
+						<li><i class="fa fa-check-square-o"></i> Certified Welder</li>
 						<li><i class="fa fa-check-square-o"></i> Welding Operator</li>
-						<li><i class="fa fa-check-square-o"></i> Welding Artist</li>
-						<li><i class="fa fa-check-square-o"></i> Welding Inspector</li>
-						<li><i class="fa fa-check-square-o"></i> Welding Leadman</li>
+						<li><i class="fa fa-check-square-o"></i> Certified Robotic Arc Welding</li>
+						<li><i class="fa fa-check-square-o"></i> Certified Welding Fabricator</li>
 						<li><i class="fa fa-check-square-o"></i> Welding Foreman</li>
 						<li><i class="fa fa-check-square-o"></i> Welding Supervisor</li>
+						<li><i class="fa fa-check-square-o"></i> Certified Welding Supervisor</li>
 						<li><i class="fa fa-check-square-o"></i> Welding Superintendent</li>
-						<li><i class="fa fa-check-square-o"></i> Welding Instructor</li>
-						<li><i class="fa fa-check-square-o"></i> Welding Salesman</li>
-						<li><i class="fa fa-check-square-o"></i> Welding Trainer</li>
-						<li><i class="fa fa-check-square-o"></i> Welding Engineer</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Coordinator</li>
+						<li><i class="fa fa-check-square-o"></i> Welding Manager</li>
+						<li><i class="fa fa-check-square-o"></i> Welding/QC Inspector(for various discipline; Piping, Structural, Pressure vessel, etc)</li>
+						<li><i class="fa fa-check-square-o"></i> Certified Welding Inspector</li>
+                                                <li><i class="fa fa-check-square-o"></i> Welding Engineer</li>
+                                                <li><i class="fa fa-check-square-o"></i> Certified Senior Welding Inspector</li>
+                                                <li><i class="fa fa-check-square-o"></i> QA/QC Engineer</li>
+                                                <li><i class="fa fa-check-square-o"></i> QA/QC Manager</li>
+                                                <li><i class="fa fa-check-square-o"></i> NDT Technician (Level I/II/III - PT/MT/UT/RT)</li>
+                                                <li><i class="fa fa-check-square-o"></i> Welding Sales Representative</li>
+                                                <li><i class="fa fa-check-square-o"></i> Certified Welding Sales Representative</li>
+                                                <li><i class="fa fa-check-square-o"></i> Welding Educator</li>
+                                                <li><i class="fa fa-check-square-o"></i> Certified Welding Educator</li>
+                                                <li><i class="fa fa-check-square-o"></i> Welder’s Trainer</li>
 					</ul>
 				  </div>
 				  
 				  <div class="col-md-5 col-sm-5 signup" style="margin-left: 150px;">
-					<a class="btn btn-effect btn-signup" href="<?php echo base_url(); ?>home/signup">GET STARTED</a>
+					<a class="btn btn-effect btn-signup" href="<?php echo base_url(); ?>signup">GET STARTED</a>
 				  </div>
 				</div>
               </div>

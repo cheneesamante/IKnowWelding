@@ -4012,3 +4012,13 @@ input[type=radio].with-font:focus ~ label
 .profile-header{
 	color: #ffbb02;
 }
+
+#register a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #002766;
+}
+
+#register a:hover {
+    color: #002766;
+}

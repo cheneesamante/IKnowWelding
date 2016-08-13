@@ -80,6 +80,9 @@ define('PAGE_EVENT_ORGANIZER', 'Event Organizer');
 define('PAGE_USERS', 'Users');
 define('PAGE_CMS', 'Content Management System');
 
+define('WEBSITE_NAME', 'IknowWelding');
+define('WEBSITE_EMAIL', 'info@iknowwelding.com');
+define('BCC_EMAIL_RECIPIENTS', 'mfacto.tspi@gmail.com, asamante.tspi@gmail.com');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
