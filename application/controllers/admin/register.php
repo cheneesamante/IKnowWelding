@@ -10,15 +10,28 @@ class Register extends CI_Controller {
         $this->load->helper('url');
         // Your own constructor code
         //Email sending
+        //not working on local (angry)
+        // 
+//        $config = Array(
+//            'protocol' => 'smtp',
+//            'smtp_host' => 'ssl://smtpout.asia.secureserver.net',
+//            'smtp_port' => 465,
+//            'smtp_user' => 'admin@iknowwelding.com', // change it to yours
+//            'smtp_pass' => 'welding2016^^', // change it to yours
+//            'mailtype' => 'html',
+//            'charset' => 'iso-8859-1',
+//            'wordwrap' => TRUE
+//        );
+        // TODO: PUT ON CONFIG/EMAIL.PHP
         $config = Array(
-            'protocol' => 'sendmail',
-            'smtp_host' => 'relay-hosting.secureserver.net',
-            'smtp_port' => 465,
-            'smtp_user' => 'admin@makatisisterhood.com', // change it to yours
-            'smtp_pass' => 'makatiadmin++', // change it to yours
-            'mailtype' => 'html',
-            'charset' => 'iso-8859-1',
-            'wordwrap' => TRUE
+            'protocol' => SITE_PROTOCOL,
+            'smtp_host' => SITE_HOST,
+            'smtp_port' => SITE_PORT,
+            'smtp_user' => SITE_USER, 
+            'smtp_pass' => SITE_PASS, 
+            'mailtype' => SITE_MAILTYPE,
+            'charset' => SITE_CHARSET,
+            'wordwrap' => SITE_WORDWRAP
         );
         $this->load->library('email', $config);
         $this->load->model('admin_model', 'Admin');
@@ -170,44 +183,46 @@ class Register extends CI_Controller {
     }
 
     public function save() {
-        if ($this->session->userdata('info')['user_id'] && ($this->session->userdata('info')['user_type_id'] == ADMIN || $this->session->userdata('info')['user_type_id'] == IRD_EMP )) {
-            $this->load->model('admin_model', 'Admin');
-            $password = $this->create_password();
-            $password_encrypt = $password['encrypt'];
-            $password_text = $password['text'];
-            $username = $this->input->post('username'); // username 
-            $email_address = $this->input->post('email_address'); // email_address
-            $first_name = $this->input->post('first_name'); // first_name
-            $middle_name = $this->input->post('middle_name'); // middle_name
-            $last_name = $this->input->post('last_name'); // username or email address
-            $birth_date = $this->input->post('birth_date'); // username or email address
-            $gender = $this->input->post('gender');
-            $user_type_id = $this->input->post('u_id'); //user_type_id
-            $user_type_name = $this->input->post('u_type_id'); //user_type_id
-            $sister_city = $this->input->post('sister_id'); //user_type_id
 
-            $data_arr = array('username' => $username, 'email_address' => $email_address, 'first_name' => $first_name,
-                'middle_name' => $middle_name, 'last_name' => $last_name, 'birthdate' => $birth_date,
-                'gender' => $gender, 'password' => $password_encrypt, 'user_type_id' => $user_type_id, 'city_name' => $sister_city);
-            //Email sending
-            $config = Array(
-            'protocol' => 'sendmail',
-            'smtp_host' => 'relay-hosting.secureserver.net',
-                'smtp_port' => 465,
-            'smtp_user' => 'admin@makatisisterhood.com', // change it to yours
-            'smtp_pass' => 'makatiadmin++', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'iso-8859-1',
-                'wordwrap' => TRUE
-            );
+        // condition 
+        $this->load->model('admin_model', 'Admin');
+        $password = $this->create_password();
+        $password_encrypt = $password['encrypt'];
+        $password_text = $password['text'];
+        $username = $this->input->post('username'); // username 
+        $user_type_id = ($this->input->post('user_type_id') ? $this->input->post('user_type_id') : 0 ); // user_type_id 
+        $email_address = $this->input->post('email_address'); // email_address
+        $first_name = $this->input->post('first_name'); // first_name
+        $middle_name = $this->input->post('middle_name'); // middle_name
+        $last_name = $this->input->post('last_name'); // last name
+        $birth_date = $this->input->post('birth_date'); 
+        $gender = $this->input->post('gender');
+        $country = $this->input->post('country');
+        $user_job = $this->input->post('user_job');
+        $field = $this->input->post('field');
+        $skills = $this->input->post('skills');
+        $working_abroad = $this->input->post('working_abroad');
+        $yrs_working_abroad = $this->input->post('yrs_working_abroad');
+        $prev_work_loc = $this->input->post('prev_work_loc');
+        $certified_qualification = $this->input->post('certified_qualification');
+        $membership = $this->input->post('membership');
 
-            $message = "Dear $first_name,
+
+        $data_arr = array('username' => $username, 'user_type_id' => $user_type_id, 'email_address' => $email_address, 'first_name' => $first_name,
+            'middle_name' => $middle_name, 'last_name' => $last_name, 'birthdate' => $birth_date,
+            'gender' => $gender, 'password' => $password_encrypt, 'country' => $country, 'user_job' => $user_job,
+            'field' => $field, 'skills' => $skills, 'working_abroad' => $working_abroad,
+            'yrs_working_abroad' => $yrs_working_abroad, 'prev_work_loc' => $prev_work_loc, 'certified_qualification' => $certified_qualification, 'membership' => $membership);
+        var_dump($data_arr);
+        die();
+// TODO: PUT ON SEPARATE FILE
+        $message = "Dear $first_name,
  <br />  <br />  <br /> 
 User Information: <br /> <br />
 Username: $username <br />
 Name: $first_name $middle_name $last_name <br />
 Email Address: $email_address <br />
-User type: $user_type_name  <br />
+User type:  <br />
 Password: $password_text
 <br /> <br />
 Once the account is activated you can now login. And login to " . base_url() . "  <br />
@@ -215,39 +230,31 @@ Please keep your assigned Email and Password in utmost secrecy to prevent unauth
  <br /> <br /> <br /> 
 Thank you very much!
  <br />  <br /> 
- Sisterhood Portal Admin";
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
-            $this->email->from('admin@makatisisterhood.com'); // change it to yours
-            $this->email->to($email_address); // change it to yours
-            $this->email->bcc('asamante.tspi@gmail.com','admin@makatisisterhood.com'); // change it to yours
-            $this->email->subject("Sisterhood Portal User Registration"); //Need to put in constants
-            $this->email->message($message);
-            if ($this->email->send()) {
-                $data['email'] = true;
-            } else {
-                show_error($this->email->print_debugger());
-            }
-            $data['result'] = $this->Admin->save_user($data_arr);
-            //should save email here
-            echo $data['result'];
+ IKnowWelding Admin";
+        $this->email->set_newline("\r\n");
+        $this->email->from('admin@iknowwelding.com'); // change it to yours
+        $this->email->to('asamante.tspi@gmail.com'); // change it to yours
+        $this->email->bcc('asamante.tspi@gmail.com',SITE_USER, 'admin@iknowwelding.com'); // change it to yours
+        $this->email->subject("IKnowWelding User Registration"); //Need to put in constants
+        $this->email->message($message);
+        if ($this->email->send()) {
+            $data['email'] = true;
         } else {
-            redirect('logout');
+            show_error($this->email->print_debugger());
         }
+        $data['result'] = $this->Admin->save_user($data_arr);
+        //should save email here
+        echo $data['result'];
     }
 
     private function create_password() {
-        if ($this->session->userdata('info')['user_id'] && ($this->session->userdata('info')['user_type_id'] == ADMIN || $this->session->userdata('info')['user_type_id'] == IRD_EMP )) {
-            $length = 8;
-            $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            $password = substr(str_shuffle($chars), 0, $length);
-            $password_md5 = md5($password);
-            $data_password = array('encrypt' => $password_md5,
-                'text' => $password);
-            return $data_password;
-        } else {
-            redirect('logout');
-        }
+        $length = 8;
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $password = substr(str_shuffle($chars), 0, $length);
+        $password_md5 = md5($password);
+        $data_password = array('encrypt' => $password_md5,
+            'text' => $password);
+        return $data_password;
     }
 
     public function get_update_user() {
@@ -322,11 +329,11 @@ Thank you very much!
                     $is_saved = $this->Admin->update_user_status($postdata);
                     //Email sending
                     $config = Array(
-            'protocol' => 'sendmail',
-            'smtp_host' => 'relay-hosting.secureserver.net',
+                        'protocol' => 'sendmail',
+                        'smtp_host' => 'relay-hosting.secureserver.net',
                         'smtp_port' => 465,
-            'smtp_user' => 'admin@makatisisterhood.com', // change it to yours
-            'smtp_pass' => 'makatiadmin++', // change it to yours
+                        'smtp_user' => 'admin@makatisisterhood.com', // change it to yours
+                        'smtp_pass' => 'makatiadmin++', // change it to yours
                         'mailtype' => 'html',
                         'charset' => 'iso-8859-1',
                         'wordwrap' => TRUE
@@ -345,7 +352,7 @@ Thank you very much!
                     $this->email->set_newline("\r\n");
                     $this->email->from('admin@makatisisterhood.com'); // change it to yours
                     $this->email->to($email_address); // change it to yours
-                    $this->email->bcc('asamante.tspi@gmail.com','admin@makatisisterhood.com'); // change it to yours
+                    $this->email->bcc('asamante.tspi@gmail.com', 'admin@makatisisterhood.com'); // change it to yours
                     $this->email->subject("Sisterhood Portal $activate"); //Need to put in constants
                     $this->email->message($message);
                     if ($this->email->send()) {
@@ -560,9 +567,9 @@ Thank you very much!
                     <br />  <br /> 
                     Sisterhood Portal Admin";
                     $this->email->set_newline("\r\n");
-                   $this->email->from('admin@makatisisterhood.com'); // change it to yours
+                    $this->email->from('admin@makatisisterhood.com'); // change it to yours
                     $this->email->to($user['email_address']); // change it to yours
-                    $this->email->bcc('admin@makatisisterhood.com','asamante.tspi@gmail.com', 'mfacto.tspi@gmail.com'); // change it to yours
+                    $this->email->bcc('admin@makatisisterhood.com', 'asamante.tspi@gmail.com', 'mfacto.tspi@gmail.com'); // change it to yours
                     $this->email->subject("Sisterhood Portal $subject"); //Need to put in constants
                     $this->email->message($message);
 
@@ -655,43 +662,43 @@ Thank you very much!
             
         }
     }
-    
-    public function check_email_address(){
+
+    public function check_email_address() {
         $email = $this->input->post('email_address');
         $is_existing = $this->Admin->check_email_exists($email);
-        if($is_existing){
+        if ($is_existing) {
             echo "false";
         } else {
             echo "true";
         }
     }
-    
-    public function check_username(){
+
+    public function check_username() {
         $username = $this->input->post('username');
         $is_existing = $this->Admin->check_username_exists($username);
-        if($is_existing){
+        if ($is_existing) {
             echo "false";
         } else {
             echo "true";
         }
     }
-    
-    public function check_other_email_address(){
+
+    public function check_other_email_address() {
         $email = $this->input->post('email_address');
         $id = $this->input->post('id');
         $is_existing = $this->Admin->check_email_exists($email, $id);
-        if($is_existing){
+        if ($is_existing) {
             echo "false";
         } else {
             echo "true";
         }
     }
-    
-    public function check_other_username(){
+
+    public function check_other_username() {
         $username = $this->input->post('username');
         $id = $this->input->post('id');
         $is_existing = $this->Admin->check_username_exists($username, $id);
-        if($is_existing){
+        if ($is_existing) {
             echo "false";
         } else {
             echo "true";

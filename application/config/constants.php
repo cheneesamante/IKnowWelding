@@ -84,5 +84,15 @@ define('WEBSITE_NAME', 'IknowWelding');
 define('WEBSITE_EMAIL', 'info@iknowwelding.com');
 define('BCC_EMAIL_RECIPIENTS', 'mfacto.tspi@gmail.com, asamante.tspi@gmail.com');
 
+// Email Config
+define('SITE_PROTOCOL', 'smtp');
+define('SITE_HOST', 'ssl://smtp.gmail.com');
+define('SITE_PORT', 465);
+define('SITE_USER', 'mfacto.tspi@gmail.com');
+define('SITE_PASS', 'michchelle14');
+define('SITE_MAILTYPE', 'html');
+define('SITE_CHARSET', 'iso-8859-1');
+define('SITE_WORDWRAP', true);
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

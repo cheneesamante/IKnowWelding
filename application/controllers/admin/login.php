@@ -14,20 +14,20 @@ class Login extends CI_Controller {
      }
 
     public function index() {
-        //$this->authentication();
-		$this->load->view('admin/header');
-		$this->load->view('admin/login_view');
+         //$this->authentication();
+		 $this->load->view('admin/header');
+		 $this->load->view('admin/login_view');
      }
      
      public function display() {
-        $this->load->view('login_box');
+         $this->load->view('login_box');
      }
      
      public function check() {
         $username = $this->input->post('username'); // username or email address
         $password = $this->input->post('password');
         $view = 'home_view';
-		$error = false;
+		    $error = false;
         if ($username) {
                     if ($password) {
                         $this->load->model('admin_model', 'Admin');
@@ -191,55 +191,5 @@ class Login extends CI_Controller {
 
     }
 
-//    private function get_view($param_user_type_id = null) {
-//        try {
-//            $result = false;
-//            if ($param_user_type_id != null) {
-//                if ($param_user_type_id == 1) {
-//                    $result = "admin/home_view.php";
-//                } elseif ($param_user_type_id == 2) {
-//                    $result = "ird/home_view";
-//                }
-//            }
-//            return $result;
-//        } catch (Exception $ex) {
-//            log_message("error", "Catch Exception:" . $ex->getMessage());
-//        }
-//    }
-//    private function menu($param_user_type_id = null){
-//        try {
-//            $result = false;
-//            $arr_common =  array(array('Makati Sister City Program','common/pages/index/0001'),
-//                                 array('Other Local Government','common/pages/index/0002'),
-//                                 array('City of Makati','common/pages/index/0003'),
-//                                 array('Makati Sister Cities','common/pages/index/0004')); 
-//            $arr_ird =  array(array('List of Makati Sisterhood','common/pages/index/0005'),
-//                              array('Private Archives','p/index.php'),
-//                              array('Messaging','common/message'),
-//                              array('Manage Archives','man/index.php'));            
-//            $arr_admin =  array(array('List of Makati Sisterhood','common/pages/index/0005'),
-//                                array('Private Archives','pri/index.php'),
-//                                array('Messaging','common/message'),
-//                                array('Manage Archives','man/index.php'),
-//                                array('Registration of User','admin/reg'),
-//                                array('Report Generation','rep/index.php'),
-//                                array('Content Management System','admin/cms'));            
-//            if ($param_user_type_id != null) {
-//                if ($param_user_type_id == 1) {
-//                    $result = array('who' => 'Admin',
-//                                    'up'=>$arr_common,
-//                                    'down'=> $arr_admin);
-//                } elseif ($param_user_type_id == 2) {
-//                    $result = array('who' => 'IRD',
-//                                    'up'=>$arr_common,
-//                                    'down'=> $arr_ird);
-//                }
-//            } else {
-//                    $result = array('up'=>$arr_common);
-//            }
-//            return $result;
-//        } catch (Exception $ex) {
-//            log_message("error", "Catch Exception:" . $ex->getMessage());
-//        } 
-//    }
+
 }

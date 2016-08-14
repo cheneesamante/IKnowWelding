@@ -101,6 +101,7 @@
     <script type="text/javascript" src="<?php echo JS_PATH; ?>smooth-scroll.js"></script>
     <script type="text/javascript" src="<?php echo JS_PATH; ?>jquery.slicknav.js"></script>
     <script type="text/javascript" src="<?php echo JS_PATH; ?>main.js"></script>
+    <script type="text/javascript" src="<?php echo JS_PATH; ?>parsley.min.js"></script>
 
     <!-- Revelosition slider js -->
     <script src="<?php echo JS_PATH; ?>jquery.themepunch.revolution.min.js"></script>
@@ -124,4 +125,33 @@
 		});
 		
 	});
+</script>
+<script>
+    	$('#form-reg').on('submit', function(e) {
+    	    e.preventDefault();
+    	    var instance = $('#form-reg').parsley();
+    	    console.log(instance.isValid());
+    	    if (instance.isValid()) {
+    	        var frm = $("#form-reg").serialize();
+    	        var msg = '<div class="alert alert-danger">Failed to add user. <br />Please check the fields</div>';
+    	            	            console.log(frm);
+//loader
+    	        $.ajax({
+    	            type: "POST",
+    	            url: "<?php echo site_url('admin/register/save'); ?>",
+    	            data: frm
+    	        }).done(function(data) {
+    	            // loader
+    	            console.log(data);
+    	            if (data == 1) {
+    	                $('#form-reg')[0].reset();
+    	                msg = '<div class="alert alert-success">Successfully saved.</div>';
+    	            }
+    	            $('#alert-modal-title').html('Add User');
+    	            $('#user-info-alert-msg').html(msg);
+    	            $('#alert-status').modal();
+    	        });
+    	        return false;
+    	    }
+    	});
 </script>
