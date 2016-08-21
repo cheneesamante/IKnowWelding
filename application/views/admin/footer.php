@@ -17,5 +17,5 @@
     <!-- CK Editor -->
     <script src="<?php echo ADMIN_PLUGIN_PATH; ?>ckeditor/ckeditor.js"></script>
 
-  </body>
+    </body>
 </html>

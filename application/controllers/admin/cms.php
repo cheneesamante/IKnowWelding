@@ -10,35 +10,35 @@ class Cms extends CI_Controller {
         $this->load->library('common');
         $this->load->model('admin_model', 'Admin');
         $this->load->model('common_model');
+        $this->load->library('encrypt');
     }
 
-    /*public function index() {
-        if ($this->session->userdata('info')['user_id'] == true) {
-            $this->load->view('header_main');
+    /* public function index() {
+      if ($this->session->userdata('info')['user_id'] == true) {
+      $this->load->view('header_main');
 
-            $data['contents'] = $this->Admin->get_cms();
-            $data['pages'] = $this->get_pages();
+      $data['contents'] = $this->Admin->get_cms();
+      $data['pages'] = $this->get_pages();
 
-            $this->load->view('admin/cms_view', $data);
-        } else {
-            $data['menu'] = $this->common->_menu();
-            $this->load->view('header', $data);
-            $this->load->view('error_page_view');
-        }
-        $this->load->view('footer');
-    }*/
-    
-    public function index(){
-    	$this->load_view('cms_view');
+      $this->load->view('admin/cms_view', $data);
+      } else {
+      $data['menu'] = $this->common->_menu();
+      $this->load->view('header', $data);
+      $this->load->view('error_page_view');
+      }
+      $this->load->view('footer');
+      } */
+
+    public function index() {
+        $this->load_view('cms_view');
     }
-    
-    public function load_view($view){
-    	$data['menu'] = $this->common_model->get_menu('ADMIN');
+
+    public function load_view($view, $param = NULL) {
+        $data['menu'] = $this->common_model->get_menu('ADMIN');
         $this->load->view('admin/header_main');
         $this->load->view('admin/side_menu_view', $data);
-        $this->load->view('admin/'.$view);
+        $this->load->view('admin/' . $view, $param);
         $this->load->view('admin/footer');
-    
     }
 
     public function save() {
@@ -47,10 +47,10 @@ class Cms extends CI_Controller {
         $bodytext = $this->input->post('bodytext');
         $reg_date = date('Y-m-d H:i:s');
         $where = " AND page_id = $page_id ";
-        if($page_id == '0004'){
+        if ($page_id == '0004') {
             $active = 1;
         } else {
-        $active = (count($this->Admin->get_active_cms($where)) > 0) ? 0 : 1; // temporary only
+            $active = (count($this->Admin->get_active_cms($where)) > 0) ? 0 : 1; // temporary only
         }
         $data['result'] = $this->Admin->save_cms(array('active' => $active, 'page_id' => $page_id, 'title' => $title, 'body' => $bodytext, 'reg_date' => $reg_date));
 
@@ -137,12 +137,15 @@ class Cms extends CI_Controller {
         foreach ($result as $row) {
             $page_id = $row['cms_id'];
             $active = $row['active'];
-            $edit = '<a href="'.site_url('admin/cms/view').'"><button type="button" onclick="javascript:update_cms("' . $page_id . '");" data-toggle="modal" data-target="#largeModal-update-cms" class="btn btn-info update-reg" id="update-cms-"' . $page_id . '">View Info</button>';
+            $page = $this->encrypt->encode($page_id);
+            $encoded = str_replace(array('+', '/', '='), array('-', '_', '~'), $page);
+            $view = " <a href='" . site_url('admin/cms/view?page=' . $encoded) . "'><button type='button' data-toggle='modal' data-target='#largeModal-update-cms' class='btn btn-info update-reg' id='update-cms-" . $page_id . "'>View Info</button></a>";
+
             if ($active == 0) {
-                $in_active = "<button type='button' data-toggle='modal' data-target='#largeModal-active-inactive-cms' onclick='javascript:update_cms_status(" . $page_id . ");' class='btn btn-success update-active-inactive' id='update-active-inactive-" . $page_id . "'>Set to Active</button>";
+                $view .= " <button type='button' data-id='" . $page_id . "' data-action='active' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-success btn-update-status' id='update-active-inactive-" . $page_id . "'>Set to Active</button>";
                 $in_active_label = 'Inactive';
             } elseif ($active == 1) {
-                $in_active = "<button type='button' data-toggle='modal' data-target='#largeModal-active-inactive-cms' onclick='javascript:update_cms_status(" . $page_id . ");' class='btn btn-danger update-active-inactive' id='update-active-inactive-" . $page_id . "'>Set to Inactive</button>";
+                $view .= " <button type='button' data-id='" . $page_id . "' data-action='inactive' data-status=0 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-danger btn-update-status' id='update-active-inactive-" . $page_id . "'>Set to Inactive</button>";
                 $in_active_label = 'Active';
             }
             $output['aaData'][] = array(
@@ -150,13 +153,13 @@ class Cms extends CI_Controller {
                 $row['title'],
                 $row['update_date'],
                 $in_active_label,
-                $edit . ' ' .  $in_active 
+                $row['ord'],
+                $view
             );
         }
 
         echo json_encode($output);
     }
-
 
     private function get_pages() {
         $result = $this->common->_pages_cms();
@@ -183,9 +186,77 @@ class Cms extends CI_Controller {
             
         }
     }
-    
-    public function view(){
-        $this->load_view('cms_info_view');
-    }  
+
+    public function view() {
+        $data = array();
+        if ($this->input->get('page') != NULL) {
+            $page = str_replace(array('-', '_', '~'), array('+', '/', '='), $this->input->get('page'));
+            $decoded = $this->encrypt->decode($page);
+            $info = $this->Admin->get_cms(' cms_id = ' . $decoded);
+            if ($info) {
+                $data['cms'] = $info[0];
+                $data['id'] = $this->input->get('page');
+                $data['count'] = $this->Admin->count_cms()->total;
+            }
+        }
+
+        $this->load_view('cms_info_view', $data);
+    }
+
+    public function update_page_status() {
+
+        $postdata = sanitize_mix_post($_POST);
+        $info = $this->Admin->get_cms(' cms_id = ' . $postdata["id"]);
+
+        if (!empty($info)) {
+            try {
+                //missing: validation here
+                $is_saved = $this->Admin->update_page_status($postdata);
+                if ($is_saved) {
+
+                    $return_info = array(
+                        'status' => (boolean) $is_saved
+                    );
+                    echo json_encode($return_info);
+                }
+            } catch (Exception $e) {
+                
+            }
+        }
+    }
+
+    public function update_page_info() {
+
+        $postdata = sanitize_mix_post($_POST);
+        $page = str_replace(array('-', '_', '~'), array('+', '/', '='), $postdata["id"]);
+        $id = $this->encrypt->decode($page);
+
+        $info = $this->Admin->get_cms(' cms_id = ' . $id);
+
+        if (!empty($info)) {
+            try {
+                //missing: validation here
+                $param = array(
+                    'page_name' => $postdata['name'],
+                    'title' => $postdata['title'],
+                    'body' => $postdata['editor'],
+                    'active' => $postdata['status'],
+                    'cms_id' => $id,
+                    'ord' => $postdata['order']
+                );
+
+                $is_saved = $this->Admin->update_page_info($param);
+                if ($is_saved) {
+
+                    $return_info = array(
+                        'status' => (boolean) $is_saved
+                    );
+                    echo json_encode($return_info);
+                }
+            } catch (Exception $e) {
+                
+            }
+        }
+    }
 
 }

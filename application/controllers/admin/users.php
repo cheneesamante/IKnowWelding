@@ -23,10 +23,10 @@ class Users extends CI_Controller {
         $this->load->library('email', $config);
     }
 
-    public function index(){
+    public function index() {
         $this->load_view('users_view');
     }
-    
+
     public function getAllUsers() {
 
         $sEcho = $this->input->get_post('sEcho', true);
@@ -74,7 +74,6 @@ class Users extends CI_Controller {
             $sWhere = " WHERE (";
             for ($i = 0; $i < count($aColumns); $i++) {
                 $sWhere .= $aColumns[$i] . " LIKE '%" . mysql_real_escape_string($_POST['sSearch']) . "%' OR ";
-
             }
             $sWhere = substr_replace($sWhere, "", -3);
             $sWhere .= ')';
@@ -103,23 +102,23 @@ class Users extends CI_Controller {
 
         foreach ($result as $row) {
 
-            $view = '<a href="'.site_url('admin/users/view').'"><button class="btn btn-info" type="submit">View Info</button></a>';
+            $view = '<a href="' . site_url('admin/users/view') . '"><button class="btn btn-info" type="submit">View Info</button></a>';
             $view .= " <button type='button' data-id='" . $row['user_id'] . "'  data-toggle='modal' data-target='#largeModal-reset' class='btn-reset btn btn-danger' id='reset-pwd-" . $row['user_id'] . "'>Reset password</button>";
-            
+
             switch ($row['active']) {
-            	case 0:
-                $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='approve' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Approve</button>";
-                $in_active_label = 'Pending';
-            		break;
-            	case 1:
-                $in_active_label = 'Active';
-            		$view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='deactivate' data-status=2 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-warning btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Deactivate</button>";
-            		break;
-            	case 2:
-            		$in_active_label = 'Deactivate';
-            		$view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='reactivate' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Reactivate</button>";
-            	default:
-            		break;
+                case 0:
+                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='approve' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Approve</button>";
+                    $in_active_label = 'Pending';
+                    break;
+                case 1:
+                    $in_active_label = 'Active';
+                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='deactivate' data-status=2 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-warning btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Deactivate</button>";
+                    break;
+                case 2:
+                    $in_active_label = 'Deactivate';
+                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='reactivate' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Reactivate</button>";
+                default:
+                    break;
             }
 
             $output['aaData'][] = array(
@@ -133,56 +132,55 @@ class Users extends CI_Controller {
         }
         echo json_encode($output);
     }
-    
-    public function update_user_status(){
+
+    public function update_user_status() {
         $postdata = sanitize_mix_post($_POST);
         $info = $this->Users->get_user_info($postdata['id']);
         $subject = 'Account Deactivation';
         $extra_message = "deactivated. Please contact the administrator. ";
-        
-        if($postdata['status'] == 1){
+
+        if ($postdata['status'] == 1) {
             $subject = 'Account Activation';
-            $extra_message = "activated. You may now login to ".  base_url() ." ";
-        } 
-        
-        if(!empty($info)){
+            $extra_message = "activated. You may now login to " . base_url() . " ";
+        }
+
+        if (!empty($info)) {
             try {
-            //missing: validation here
+                //missing: validation here
                 $is_saved = $this->Users->update_user_status($postdata);
-                if($is_saved){
-                    
-                        //Email sending
-                        $data['first_name'] = $info->first_name;
-                        $data['message'] = $extra_message;
-                        $message = $this->load->view('admin/email/update_account_status', $data, TRUE);
+                if ($is_saved) {
 
-                        $this->email->set_newline("\r\n");
-                        $this->email->from(WEBSITE_EMAIL); // change it to yours
-                        $this->email->to($info->email_address); // change it to yours
-                        $this->email->bcc(BCC_EMAIL_RECIPIENTS); // change it to yours
-                        $this->email->subject(WEBSITE_NAME. " $subject"); //Need to put in constants
-                        $this->email->message($message);
+                    //Email sending
+                    $data['first_name'] = $info->first_name;
+                    $data['message'] = $extra_message;
+                    $message = $this->load->view('admin/email/update_account_status', $data, TRUE);
 
-                        if ($this->email->send()) {
-                           $data['email'] = true;
-                        } else {
-                            show_error($this->email->print_debugger());
-                        }
-                
-                    
-                        $return_info = array(
-                            'status' => (boolean) $is_saved
-                        );
-                        echo json_encode($return_info);
+                    $this->email->set_newline("\r\n");
+                    $this->email->from(WEBSITE_EMAIL); // change it to yours
+                    $this->email->to($info->email_address); // change it to yours
+                    $this->email->bcc(BCC_EMAIL_RECIPIENTS); // change it to yours
+                    $this->email->subject(WEBSITE_NAME . " $subject"); //Need to put in constants
+                    $this->email->message($message);
+
+                    if ($this->email->send()) {
+                        $data['email'] = true;
+                    } else {
+                        show_error($this->email->print_debugger());
+                    }
+
+
+                    $return_info = array(
+                        'status' => (boolean) $is_saved
+                    );
+                    echo json_encode($return_info);
                 }
-            } catch(Exception $e) {
-
+            } catch (Exception $e) {
+                
             }
         }
-     }
-     
-     
-     public function reset_password(){
+    }
+
+    public function reset_password() {
         $password = $this->create_password();
         $postdata = sanitize_mix_post($_POST);
         $info = array(
@@ -192,62 +190,62 @@ class Users extends CI_Controller {
 
         $user = $this->Users->get_user_info($postdata['user_id']);
         $subject = 'Password Reset';
-        try{
+        try {
             //missing: validation here
-            if(!empty($postdata) && !empty($user)) {
+            if (!empty($postdata) && !empty($user)) {
                 $is_saved = $this->Users->reset_user_password($info);
                 $data['first_name'] = $user->first_name;
                 $data['password'] = $password['text'];
                 //Email sending
 
                 $message = $this->load->view('admin/email/reset_password', $data, TRUE);
-                
+
                 $this->email->set_newline("\r\n");
                 $this->email->from(WEBSITE_EMAIL); // change it to yours
                 $this->email->to($user->email_address); // change it to yours
                 $this->email->bcc(BCC_EMAIL_RECIPIENTS); // change it to yours
-                $this->email->subject(WEBSITE_NAME. " $subject"); //Need to put in constants
+                $this->email->subject(WEBSITE_NAME . " $subject"); //Need to put in constants
                 $this->email->message($message);
-                    
+
                 if ($this->email->send()) {
-                   $data['email'] = true;
+                    $data['email'] = true;
                 } else {
                     show_error($this->email->print_debugger());
                 }
                 //end
                 $return_info = array(
-                  'status' => (boolean) $is_saved,
-                  'email' => $user->email_address
+                    'status' => (boolean) $is_saved,
+                    'email' => $user->email_address
                 );
                 echo json_encode($return_info);
-            } 
-        } catch(Exception $e) {
-
+            }
+        } catch (Exception $e) {
+            
         }
-     }
-     
-     private function create_password(){
+    }
+
+    private function create_password() {
         $length = 8;
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $password = substr(str_shuffle($chars),0,$length);
+        $password = substr(str_shuffle($chars), 0, $length);
         $password_md5 = md5($password);
         $data_password = array('encrypt' => $password_md5,
-                                'text'   => $password);
+            'text' => $password);
         return $data_password;
-     }
-     
-    public function view(){
-        $this->load_view('user_info_view');
-    }  
+    }
 
-    public function load_view($view){
+    public function view() {
+        $this->load_view('user_info_view');
+    }
+
+    public function load_view($view) {
         $data['menu'] = $this->common_model->get_menu('ADMIN');
         $this->load->view('admin/header_main');
         $this->load->view('admin/side_menu_view', $data);
-        $this->load->view('admin/'.$view);
+        $this->load->view('admin/' . $view);
         $this->load->view('admin/footer');
-    
     }
+
 }
 
 /* End of file welcome.php */

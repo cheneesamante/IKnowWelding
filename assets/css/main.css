@@ -4023,3 +4023,11 @@ input[type=radio].with-font:focus ~ label
 #register a:hover {
     color: #002766;
 }
+
+.content{
+    min-height: 420px;
+}
+
+.content p {
+    color: white !important;
+}

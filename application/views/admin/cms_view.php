@@ -1,9 +1,9 @@
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#tbl-cms').dataTable({
             "bProcessing": true,
             "bServerSide": true,
-            "sAjaxSource" : "<?php echo site_url('admin/cms/getAllCMS'); ?>",
+            "sAjaxSource": "<?php echo site_url('admin/cms/getAllCMS'); ?>",
             "iDisplayStart": 0,
             "iDisplayLength": 10,
             "sPaginationType": "full_numbers",
@@ -11,11 +11,11 @@
             "order": [[0, "desc"]],
             "bLengthChange": false,
             "aoColumnDefs": [
-                {"bSortable": true, "aTargets": [0, 1, 2, 3]},
-                {"bSortable": false, "aTargets": [4]}
+                {"bSortable": true, "aTargets": [0, 1, 2, 3, 4]},
+                {"bSortable": false, "aTargets": [5]}
             ],
             "aaSorting": [[0, "desc"]], // Sort by first column descending
-            "fnServerData": function(sSource, aoData, fnCallback) {
+            "fnServerData": function (sSource, aoData, fnCallback) {
                 $.ajax(
                         {
                             'dataType': 'json',
@@ -27,52 +27,87 @@
                 );
             }
         });
-        
-        
-        $('.btn-refresh').click(function(e) {	
+
+
+        $('.btn-refresh').click(function (e) {
             window.location.reload();
         });
 
+        $(document).on("click", ".btn-update-status", function () {
+            var userId = $(this).data('id');
+            var userAction = $(this).data('action');
+            var userStatus = $(this).data('status');
+            $(".modal-body #update_page_id").val(userId);
+            $(".modal-body #action").html(userAction);
+            $('#btn-update-page-status').data('id', userId);
+            $('#btn-update-page-status').data('status', userStatus);
+            console.log(userStatus);
         });
 
+        $('#btn-update-page-status').click(function (e) {
+            var error = '';
+            var msg = '<div class="alert alert-danger">Failed to update status.</div>';
+            $('#largeModal-active-inactive').modal('hide');
+            $('#processing-modal').modal();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('admin/cms/update_page_status'); ?>",
+                data: {id: $(this).data('id'), status: $(this).data('status')}
+            }).done(function (data) {
+                $('#processing-modal').modal('hide');
+
+                var json_data = JSON.parse(data);
+                if (json_data.status != false) {
+                    msg = '<div class="alert alert-success">Status has been successfully changed.</div>';
+                }
+                $('#update-active-inactive-msg').html(msg);
+                $('#active-inactive-successful').modal();
+            });
+            return false;
+
+        });
+
+    });
+
 </script>
-	  <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper"  style="min-height: 1096px;">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper"  style="min-height: 1096px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
             Content Management System
-          </h1>
-          <ol class="breadcrumb">
-            <!--<li><a href="#"><i class="fa fa-dashboard"></i> Registered Users</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>-->
-          </ol>
-        </section>
-         <!-- Main content -->
-        <section class="content">
+        </h1>
+        <ol class="breadcrumb">
+          <!--<li><a href="#"><i class="fa fa-dashboard"></i> Registered Users</a></li>
+          <li><a href="#">Tables</a></li>
+          <li class="active">Data tables</li>-->
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
 
-          <!-- Default box -->
-              <div class="box">
-                <div class="box-header">
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="tbl-cms" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                        <th>Page</th>
-                    <th>Title</th>
-                        <th>Last Modified</th>
-                    <th>Status</th>
-                        <th>&nbsp;</th>
-                </tr>
-            </thead>
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-header">
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="tbl-cms" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Title</th>
+                            <th>Last Modified</th>
+                            <th>Status</th>
+                            <th>Order</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
 
-                    </table>					
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-       </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+                </table>					
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
 
 <!-- overlay -->
 <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
@@ -90,26 +125,78 @@
     </div>
 </div>
 
-    <!-- For other status alert -->
-    <div id="alert-status" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
-                        <h4 id="alert-modal-title" class="modal-title">Change User Status</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="user-info-alert-msg"></div>
-                    </div>
+<div class="modal fade" id="largeModal-active-inactive" tabindex="-1" role="dialog" aria-labelledby="largeModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="close_update" onclick="javascript:close_active_inactive();" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Update Page Status</h4>
+            </div>	  
+            <div class="modal-body">
+                <form id="form-update-active-inactive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td><strong>Are you sure you want to set the status of this page to <span id="action"></span>? </strong></td>
+                            </tr>   				
 
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>					  
+                    <input type="hidden" value="" name="action" id="hidden-action">  
+                    <input type="hidden" name="page_id" id="update_page_id" value=""> 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-default" onclick="javascript:refresh_page()">OK</button>
-                    </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" data-id="" id="btn-update-page-status" class="btn btn-primary">OK</button>
+                    </div>	  
                 </form>
             </div>
         </div>
     </div>
+</div>
+
+<!-- For update status alert -->
+<div id="active-inactive-successful" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+                <h4 class="modal-title">Update Page Status</h4>
+            </div>
+            <div class="modal-body">
+                <div id="update-active-inactive-msg"></div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default btn-refresh" data-dismiss="modal">OK</button>
+            </div>	  
+
+        </div>
+    </div>
+</div>
+
+<!-- For other status alert -->
+<div id="alert-status" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+                    <h4 id="alert-modal-title" class="modal-title">Change User Status</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="user-info-alert-msg"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" onclick="javascript:refresh_page()">OK</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 
