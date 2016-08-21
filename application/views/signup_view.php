@@ -35,7 +35,7 @@
                         <label for="female" class="light">Female</label>
                     </div>
                 </div>
-
+                <br/>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" data-parsley-trigger="change" required="required">
 
@@ -105,9 +105,10 @@
                         <label for="no" class="light">No</label>
                     </div>
                 </div>
+                <br/>
                 <label for="yrs">Number of years working</label>
                 <input type="number" data-parsley-trigger="change" required="required" id="yrs" name="yrs">
-
+                
                 <label for="location">Previous/Current work location</label>
                 <input type="text" id="location" name="location">
 
@@ -143,11 +144,15 @@
                         <label for="local" class="light">Specify:</label>
                         <input type="text" name=""  id="local-others"/></div><br>
                 </div>
-
-                <button id="submit" class="btn btn-signup-form" type="submit" style="pointer-events: all; cursor: pointer;">
-                    <i class="fa fa-check"></i>
-                    SIGN UP
-                </button>
+                                <br/>
+				 <div class="text-center">By clicking Sign up, you agree to IknowWelding's <a>User Agreement</a> and <a>Privacy Policy</a>.</div>
+                                 <div class="text-center">
+                                    <br/>
+                                    <button id="submit" class="btn btn-signup-form" type="submit" style="pointer-events: all; cursor: pointer;">
+                                           <i class="fa fa-arrow-circle-right"></i> SIGN UP
+                                    </button>
+                                 </div>
+                                 <br/>
 
             </form>
         </div>

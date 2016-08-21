@@ -3797,8 +3797,7 @@ html {
   box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
   margin-bottom: 30px;
   border-radius: 5px;
-  /*color: white;*/
-    color: #000; 
+  color: white;
 }
 
 #register input[type="radio"] {
@@ -3870,7 +3869,7 @@ html {
     z-index: 1;
 	background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0;
 }
-#register #local, #register #international-others{
+#register #local-others, #register #international-others{
     background: transparent;
     border: none;
     border-color: -moz-use-text-color -moz-use-text-color #002766;

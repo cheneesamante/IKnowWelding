@@ -1,7 +1,17 @@
 <script>
     $(document).ready(function () {
-        $('#form-update-cms').submit(function (e) {
-            var error = '';
+        $("#form-update-cms").validate({
+            
+            rules: {
+                name: "required",
+                title: "required",
+              },
+            messages: {
+      name: "Please enter page name",
+      title: "Please enter page title",
+            },
+            submitHandler: function(form) {
+              var error = '';
             var msg = '<div class="alert alert-danger">Failed to update.</div>';
 
             $('#processing-modal').modal();
@@ -19,8 +29,9 @@
                 $('#update-msg').html(msg);
                 $('#update-successful').modal();
             });
-            return false;
-        });
+            }
+          });
+       
 
         $('.btn-refresh').click(function (e) {
             window.location.reload();
@@ -53,11 +64,11 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label for="name">Page</label>
-                        <input type="text" class="form-control" required name="name" id="name" placeholder="" value="<?php echo isset($cms['page_name']) ? $cms['page_name'] : "" ?>">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="" value="<?php echo isset($cms['page_name']) ? $cms['page_name'] : "" ?>">
                     </div>
                     <div class="form-group">
                         <label for="surname">Title</label>
-                        <input type="text" class="form-control" required name="title" id="title" placeholder="" value="<?php echo isset($cms['title']) ? $cms['title'] : "" ?>">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="" value="<?php echo isset($cms['title']) ? $cms['title'] : "" ?>">
                     </div>
                     <div class="form-group">
                         <label>Status</label>

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="<?php echo ADMIN_DIST_PATH; ?>css/skins/_all-skins.min.css">
     <!-- jQuery 2.1.4 -->
     <script src="<?php echo ADMIN_PLUGIN_PATH; ?>jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="<?php echo ADMIN_PLUGIN_PATH; ?>jQuery/jquery.validate.min.js"></script>
     <!-- Bootstrap -->
     <script src="<?php echo ADMIN_BOOTSTRAP_PATH; ?>js/bootstrap.min.js"></script>
 
