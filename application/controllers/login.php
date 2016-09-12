@@ -37,13 +37,14 @@ class Login extends CI_Controller {
                     $check_view = $this->common->_get_view();
                     if ($data['active'] == 0) {
                         $error = 2;
-                    } else {
-                        /* check user_type */
-                        $check_view = $this->common->_get_view($data['user_type_id']);
-                        if ($view == $check_view) {
-                            $error = 4;
-                        }
                     }
+//                    else {
+//                        /* check user_type */
+//                        $check_view = $this->common->_get_view($data['user_type_id']);
+//                        if ($view == $check_view) {
+//                            $error = 4;
+//                        }
+//                    }
                     $view = $check_view;
                 } else {
                     $error = 1;
@@ -67,11 +68,13 @@ class Login extends CI_Controller {
                 $error = 'Please contact the system administrator.';
                 break;
         }
-
-        if (false != $error) {
-            echo json_encode(array('err' => true, 'msg' => $error));
+        if (!$error) {
+//            echo json_encode(array('err' => true, 'msg' => $error));
+            $this->load->view('header_main');
+            $this->load->view($view);
+            $this->load->view('footer');
         } else {
-            echo json_encode(array('err' => false));
+//            echo json_encode(array('err' => false));
         }
     }
 

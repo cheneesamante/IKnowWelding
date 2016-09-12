@@ -208,7 +208,7 @@ class Register extends CI_Controller {
         $prev_work_loc = $this->input->post('prev_work_loc');
         $certified_qualification = $this->input->post('certified_qualification');
         $membership = $this->toStringWithOther($this->input->post('membership')); // checking
-        
+
         $this->form_validation->set_rules($this->config_registration_validation());
 
         if ($this->form_validation->run() === false) {
@@ -223,33 +223,33 @@ class Register extends CI_Controller {
                 'field' => $field, 'skills' => $skills, 'working_abroad' => $working_abroad,
                 'yrs_working_abroad' => $yrs_working_abroad, 'prev_work_loc' => $prev_work_loc, 'certified_qualification' => $certified_qualification, 'membership' => $membership);
 // TODO: PUT ON SEPARATE FILE
-//        $message = "Dear $first_name,
-// <br />  <br />  <br /> 
-//User Information: <br /> <br />
-//Username: $username <br />
-//Name: $first_name $middle_name $last_name <br />
-//Email Address: $email_address <br />
-//User type:  <br />
-//Password: $password_text
-//<br /> <br />
-//Once the account is activated you can now login. And login to " . base_url() . "  <br />
-//Please keep your assigned Email and Password in utmost secrecy to prevent unauthorized access of your account.
-// <br /> <br /> <br /> 
-//Thank you very much!
-// <br />  <br /> 
-// IKnowWelding Admin";
-//        $this->email->set_newline("\r\n");
-//        $this->email->from('admin@iknowwelding.com'); // change it to yours
-//        $this->email->to('asamante.tspi@gmail.com'); // change it to yours
-//        $this->email->bcc('asamante.tspi@gmail.com', SITE_USER, 'admin@iknowwelding.com'); // change it to yours
-//        $this->email->subject("IKnowWelding User Registration"); //Need to put in constants
-//        $this->email->message($message);
-//        if ($this->email->send()) {
-//            $data['email'] = true;
-//        } else {
-//            show_error($this->email->print_debugger());
-//        }
-           
+            $message = "Dear $first_name,
+ <br />  <br />  <br /> 
+User Information: <br /> <br />
+Username: $username <br />
+Name: $first_name $middle_name $last_name <br />
+Email Address: $email_address <br />
+User type:  <br />
+Password: $password_text
+<br /> <br />
+Once the account is activated you can now login. And login to " . base_url() . "  <br />
+Please keep your assigned Email and Password in utmost secrecy to prevent unauthorized access of your account.
+ <br /> <br /> <br /> 
+Thank you very much!
+ <br />  <br /> 
+ IKnowWelding Admin";
+            $this->email->set_newline("\r\n");
+            $this->email->from('admin@iknowwelding.com'); // change it to yours
+            $this->email->to('asamante.tspi@gmail.com'); // change it to yours
+            $this->email->bcc('asamante.tspi@gmail.com', SITE_USER, 'admin@iknowwelding.com'); // change it to yours
+            $this->email->subject("IKnowWelding User Registration"); //Need to put in constants
+            $this->email->message($message);
+            if ($this->email->send()) {
+                $data['email'] = true;
+            } else {
+                show_error($this->email->print_debugger());
+            }
+
             $data['result'] = $this->Admin->save_user($data_arr);
             //should save email here
             echo $data['result'];
@@ -760,7 +760,7 @@ Thank you very much!
         if (is_array($array)) {
             $result = implode(",", $array);
 
-            if ($result == '3' ||  $result == '4') {
+            if ($result == '3' || $result == '4') {
                 $result = $this->input->post('local_others') ? "3:" . $this->input->post('local_others') : "4:" . $this->input->post('international_others');
             }
             return $result;

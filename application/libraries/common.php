@@ -43,13 +43,12 @@ class common
         try {
             $result = 'home_view';
             if ($param_user_type_id != null) {
-//                if ($param_user_type_id == ADMIN) {
-//                    $result = "admin/home_view";
-//                } elseif ($param_user_type_id == IRD_EMP || $param_user_type_id == SISTER_LGU) {
-//                    $result = "ird/home_view";
-//                }
+                if ($param_user_type_id == ADMIN) {
+                    $result = "admin/home_view";
+                } else {
+                    $result = "member_view";
+                }
                 // I need a view here.
-                
             } 
             return $result;
         } catch (Exception $ex) {

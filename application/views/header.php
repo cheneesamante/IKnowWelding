@@ -51,10 +51,10 @@
                             </div>
                             <div class="col-md-5 col-sm-3">
                                  <!--Start Social Links--> 
-                                <form id="form-login" data-parsley-validate>
+                                <form id="form-login" method="post" action="<?php echo site_url('login/check'); ?>" data-parsley-validate>
                                     <ul class="social-list">
                                         <li>
-                                            <input type="email" data-parsley-trigger="change" required="required" placeholder="Email address" />
+                                            <input type="text" name="username" id="username" data-parsley-trigger="change" required="required" placeholder="Email address or Username" />
                                         </li>
                                         <li>
                                             &nbsp;
@@ -69,7 +69,7 @@
                                             &nbsp;
                                         </li>
                                         <li>
-                                            <input type="password" data-parsley-trigger="change" required="required" placeholder="Password" />
+                                            <input type="password" name="password" id="password" data-parsley-trigger="change" required="required" placeholder="Password" />
                                         </li>
                                         <li>
                                             <div class="col-md-4 col-sm-4">
