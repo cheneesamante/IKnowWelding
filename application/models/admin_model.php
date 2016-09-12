@@ -29,21 +29,16 @@ class Admin_model extends CI_Model {
     }
 
     public function check_email_exists($email, $id = null) {
-
-
         $sql = 'SELECT * FROM user_info WHERE email_address = ?';
         $sql .=!is_null($id) ? " AND user_id != $id" : '';
 
         $qry = $this->db->query($sql, $email);
-        $data = FALSE;
 
         if ($qry->num_rows() > 0) {
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
-
-        return $data;
     }
 
     public function check_username_exists($username, $id = null) {

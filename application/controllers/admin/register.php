@@ -27,14 +27,16 @@ class Register extends CI_Controller {
             'protocol' => SITE_PROTOCOL,
             'smtp_host' => SITE_HOST,
             'smtp_port' => SITE_PORT,
-            'smtp_user' => SITE_USER, 
-            'smtp_pass' => SITE_PASS, 
+            'smtp_user' => SITE_USER,
+            'smtp_pass' => SITE_PASS,
             'mailtype' => SITE_MAILTYPE,
             'charset' => SITE_CHARSET,
             'wordwrap' => SITE_WORDWRAP
         );
         $this->load->library('email', $config);
         $this->load->model('admin_model', 'Admin');
+        $this->load->library('form_validation');
+        $this->load->helper('security');
     }
 
     public function index() {
@@ -183,7 +185,6 @@ class Register extends CI_Controller {
     }
 
     public function save() {
-
         // condition 
         $this->load->model('admin_model', 'Admin');
         $password = $this->create_password();
@@ -191,60 +192,69 @@ class Register extends CI_Controller {
         $password_text = $password['text'];
         $username = $this->input->post('username'); // username 
         $user_type_id = ($this->input->post('user_type_id') ? $this->input->post('user_type_id') : 0 ); // user_type_id 
-        $email_address = $this->input->post('email_address'); // email_address
+        $email_address = $this->check_emailaddress($this->input->post('email_address')); // email_address
+        // check email address uniqueness
         $first_name = $this->input->post('first_name'); // first_name
         $middle_name = $this->input->post('middle_name'); // middle_name
         $last_name = $this->input->post('last_name'); // last name
-        $birth_date = $this->input->post('birth_date'); 
+        $birth_date = $this->input->post('birth_date');
         $gender = $this->input->post('gender');
         $country = $this->input->post('country');
         $user_job = $this->input->post('user_job');
         $field = $this->input->post('field');
-        $skills = $this->input->post('skills');
+        $skills = $this->toString($this->input->post('skills')); // checking
         $working_abroad = $this->input->post('working_abroad');
         $yrs_working_abroad = $this->input->post('yrs_working_abroad');
         $prev_work_loc = $this->input->post('prev_work_loc');
         $certified_qualification = $this->input->post('certified_qualification');
-        $membership = $this->input->post('membership');
+        $membership = $this->toStringWithOther($this->input->post('membership')); // checking
+        
+        $this->form_validation->set_rules($this->config_registration_validation());
 
-
-        $data_arr = array('username' => $username, 'user_type_id' => $user_type_id, 'email_address' => $email_address, 'first_name' => $first_name,
-            'middle_name' => $middle_name, 'last_name' => $last_name, 'birthdate' => $birth_date,
-            'gender' => $gender, 'password' => $password_encrypt, 'country' => $country, 'user_job' => $user_job,
-            'field' => $field, 'skills' => $skills, 'working_abroad' => $working_abroad,
-            'yrs_working_abroad' => $yrs_working_abroad, 'prev_work_loc' => $prev_work_loc, 'certified_qualification' => $certified_qualification, 'membership' => $membership);
-        var_dump($data_arr);
-        die();
-// TODO: PUT ON SEPARATE FILE
-        $message = "Dear $first_name,
- <br />  <br />  <br /> 
-User Information: <br /> <br />
-Username: $username <br />
-Name: $first_name $middle_name $last_name <br />
-Email Address: $email_address <br />
-User type:  <br />
-Password: $password_text
-<br /> <br />
-Once the account is activated you can now login. And login to " . base_url() . "  <br />
-Please keep your assigned Email and Password in utmost secrecy to prevent unauthorized access of your account.
- <br /> <br /> <br /> 
-Thank you very much!
- <br />  <br /> 
- IKnowWelding Admin";
-        $this->email->set_newline("\r\n");
-        $this->email->from('admin@iknowwelding.com'); // change it to yours
-        $this->email->to('asamante.tspi@gmail.com'); // change it to yours
-        $this->email->bcc('asamante.tspi@gmail.com',SITE_USER, 'admin@iknowwelding.com'); // change it to yours
-        $this->email->subject("IKnowWelding User Registration"); //Need to put in constants
-        $this->email->message($message);
-        if ($this->email->send()) {
-            $data['email'] = true;
+        if ($this->form_validation->run() === false) {
+            // return page with error
+            $this->load->view('header');
+            $this->load->view('signup_view');
+            $this->load->view('footer');
         } else {
-            show_error($this->email->print_debugger());
+            $data_arr = array('username' => $username, 'user_type_id' => $user_type_id, 'email_address' => $email_address, 'first_name' => $first_name,
+                'middle_name' => $middle_name, 'last_name' => $last_name, 'birthdate' => $birth_date,
+                'gender' => $gender, 'password' => $password_encrypt, 'country' => $country, 'user_job' => $user_job,
+                'field' => $field, 'skills' => $skills, 'working_abroad' => $working_abroad,
+                'yrs_working_abroad' => $yrs_working_abroad, 'prev_work_loc' => $prev_work_loc, 'certified_qualification' => $certified_qualification, 'membership' => $membership);
+// TODO: PUT ON SEPARATE FILE
+//        $message = "Dear $first_name,
+// <br />  <br />  <br /> 
+//User Information: <br /> <br />
+//Username: $username <br />
+//Name: $first_name $middle_name $last_name <br />
+//Email Address: $email_address <br />
+//User type:  <br />
+//Password: $password_text
+//<br /> <br />
+//Once the account is activated you can now login. And login to " . base_url() . "  <br />
+//Please keep your assigned Email and Password in utmost secrecy to prevent unauthorized access of your account.
+// <br /> <br /> <br /> 
+//Thank you very much!
+// <br />  <br /> 
+// IKnowWelding Admin";
+//        $this->email->set_newline("\r\n");
+//        $this->email->from('admin@iknowwelding.com'); // change it to yours
+//        $this->email->to('asamante.tspi@gmail.com'); // change it to yours
+//        $this->email->bcc('asamante.tspi@gmail.com', SITE_USER, 'admin@iknowwelding.com'); // change it to yours
+//        $this->email->subject("IKnowWelding User Registration"); //Need to put in constants
+//        $this->email->message($message);
+//        if ($this->email->send()) {
+//            $data['email'] = true;
+//        } else {
+//            show_error($this->email->print_debugger());
+//        }
+           
+            $data['result'] = $this->Admin->save_user($data_arr);
+            //should save email here
+            echo $data['result'];
+            // call modal here and redirect
         }
-        $data['result'] = $this->Admin->save_user($data_arr);
-        //should save email here
-        echo $data['result'];
     }
 
     private function create_password() {
@@ -663,13 +673,14 @@ Thank you very much!
         }
     }
 
-    public function check_email_address() {
-        $email = $this->input->post('email_address');
-        $is_existing = $this->Admin->check_email_exists($email);
-        if ($is_existing) {
-            echo "false";
+    public function check_emailaddress($email) {
+        $result = $this->Admin->check_email_exists($email);
+
+        if ($result) {
+            $this->form_validation->set_message('check_emailaddress', "Email Adress already exist.");
+            return false;
         } else {
-            echo "true";
+            return $email;
         }
     }
 
@@ -702,6 +713,57 @@ Thank you very much!
             echo "false";
         } else {
             echo "true";
+        }
+    }
+
+    /** Config for fields validation
+     * return config
+     * */
+    private function config_registration_validation() {
+        $config = array(
+            array(
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'required|trim|xss_clean'
+            ),
+            array(
+                'field' => 'email_address',
+                'label' => 'Email',
+//                'rules' => 'required|callback_check_emailaddress'
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'first_name',
+                'label' => 'First Name',
+                'rules' => 'required|trim|xss_clean'
+            )
+        );
+        return $config;
+    }
+
+    /** Convert to string
+     * return string
+     * */
+    private function toString($array) {
+        $result = "";
+        if (is_array($array)) {
+            $result = implode(",", $array);
+            return $result;
+        }
+    }
+
+    /** Convert to string with text
+     * return string
+     * */
+    private function toStringWithOther($array) {
+        $result = "";
+        if (is_array($array)) {
+            $result = implode(",", $array);
+
+            if ($result == '3' ||  $result == '4') {
+                $result = $this->input->post('local_others') ? "3:" . $this->input->post('local_others') : "4:" . $this->input->post('international_others');
+            }
+            return $result;
         }
     }
 
