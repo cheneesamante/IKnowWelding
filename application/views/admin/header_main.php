@@ -71,7 +71,7 @@
                       <li><!-- start message -->
                         <!-- <a href="#">
                           <div class="pull-left">
-                            <img src="<?php echo ADMIN_DIST_PATH; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="<?php echo $img; ?>" class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Support Team
@@ -138,22 +138,20 @@
                 </ul>
               </li> -->
               <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="<?php echo ADMIN_DIST_PATH; ?>img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Alexander Pierce</span>
+              <li class="user-menu">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="<?php echo $img; ?>" class="user-image" alt="User Image">
+                  <span class="hidden-xs"><?php echo $name; ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
-                  <li class="user-header">
+                  <!--<li class="user-header">
                     <img src="<?php echo ADMIN_DIST_PATH; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
-                    </p>
-                  </li>
+                      Alexander Pierce
+                  </li>-->
                   <!-- Menu Body -->
-                  <li class="user-body">
+                  <!--<li class="user-body">
                     <div class="col-xs-4 text-center">
                       <a href="#">Followers</a>
                     </div>
@@ -165,19 +163,32 @@
                     </div>
                   </li>
                   <!-- Menu Footer-->
-                  <li class="user-footer">
+                  <!--<li class="user-footer">
                     <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
+                    </div>-->
                   </li>
                 </ul>
               </li>
-              <!-- Control Sidebar Toggle Button -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-gears"></i>
+                </a>
+                <ul class="dropdown-menu signout">
               <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        <ul class="menu">
+              <li>
+                                <a href="<?php echo site_url('admin/signout'); ?>">
+                                <i class="fa fa-user text-red"></i>
+                                Sign Out
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
               </li>
             </ul>
           </div>

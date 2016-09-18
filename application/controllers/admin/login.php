@@ -10,6 +10,7 @@ class Login extends CI_Controller {
         $this->load->library('common');
         $this->load->model('admin_model', 'Admin');
         $this->load->model('common_model');
+        $this->load->library('session');
 		// Your own constructor code
      }
 
@@ -28,22 +29,23 @@ class Login extends CI_Controller {
         $password = $this->input->post('password');
         $view = 'home_view';
 		    $error = false;
+
         if ($username) {
                     if ($password) {
-                        $this->load->model('admin_model', 'Admin');
-                        $data = $this->Admin->check_user(array('username_email' => $username, 'password' => $password));
+                        
+                        $data = $this->Admin->check_user(array('username' => $username, 'password' => $password));
                         if (count($data) > 0) {
                             $check_view = $this->common->_get_view();
-                            if ($data['active'] == 0) {
+                            if ($data['status'] == 0) {
                                 $error = 2;
-                            } else {
+                            } /*else { */
                             /* check user_type */
-                            $check_view = $this->common->_get_view($data['user_type_id']);
+                            /*$check_view = $this->common->_get_view($data['user_type_id']);
                                 if ($view == $check_view) {
                                     $error = 4;
                                 }
                             }
-                            $view = $check_view;
+                            $view = $check_view;*/
                         } else {
                             $error = 1;
                         }
@@ -53,14 +55,14 @@ class Login extends CI_Controller {
         }
         switch ($error) {
                     case 1:
-                        $error = 'Invalid Email Address and Password';
+                        $error = 'Invalid Username and Password';
                         break;
                     /* account deactivated */
                     case 2:
-                        $error = 'You are not allowed to login as your account is de-activated.';
+                        $error = 'You are not allowed to login as your account is deactivated.';
                         break;
                     case 3:
-                       $error = 'You are not registered user!';
+                       $error = 'You are not a registered user!';
                         break;
                     case 4:
                         $error = 'Please contact the system administrator.';
@@ -70,9 +72,30 @@ class Login extends CI_Controller {
         if (false != $error){
             echo json_encode(array('err'=>true, 'msg'=>$error));
         } else {
+        	$sess_userdata = array(
+        			'session_key'       => md5($this->session->userdata('session_id')),
+        			'account_name'      => ucwords(strtolower($data['fname']." ".$data['lname'])),
+        			'email'             => $data['email_address'],
+        			'img'               => empty($data['image_url']) ? 
+        				ADMIN_DIST_PATH . 'img/user2-160x160.jpg' : $data['image_url'],
+        			'account_type_code' => 'ADMIN',
+        			'account_type_id'   => 1,
+        			'username'          => $data['username']
+        	);
+        	 
+        	$this->session->set_userdata($sess_userdata);
             echo json_encode(array('err'=>false));
         }
         
+     }
+
+     public function redirect(){
+        $user = $this->session->userdata('username');
+        if(!$user){
+     		$this->load->view('login_box');
+     	} else {
+     		$this->load->view('home_view');
+     	}
      }
 
      private function authentication() {

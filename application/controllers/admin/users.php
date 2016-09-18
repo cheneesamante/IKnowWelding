@@ -21,6 +21,12 @@ class Users extends CI_Controller {
             'wordwrap' => TRUE
         );
         $this->load->library('email', $config);
+        $this->load->library('encrypt');
+        $this->load->library('session');
+        $user = $this->session->userdata('username');
+        if(!$user){
+        	redirect('admin/login');
+        }
     }
 
     public function index() {
@@ -101,27 +107,30 @@ class Users extends CI_Controller {
         );
 
         foreach ($result as $row) {
-
-            $view = '<a href="' . site_url('admin/users/view') . '"><button class="btn btn-info" type="submit">View Info</button></a>';
-            $view .= " <button type='button' data-id='" . $row['user_id'] . "'  data-toggle='modal' data-target='#largeModal-reset' class='btn-reset btn btn-danger' id='reset-pwd-" . $row['user_id'] . "'>Reset password</button>";
+        	$userid = $row['user_id'];
+        	$user = $this->encrypt->encode($userid);
+        	$encoded = str_replace(array('+', '/', '='), array('-', '_', '~'), $user);
+            $view = '<a href="' . site_url('admin/users/view?user=' . $encoded) . '"><button class="btn-sm btn btn-info" type="submit">View Info</button></a>';
+            $view .= " <button type='button' data-id='" . $row['user_id'] . "'  data-toggle='modal' data-target='#largeModal-reset' class='btn-sm btn-reset btn btn-danger' id='reset-pwd-" . $row['user_id'] . "'>Reset password</button>";
 
             switch ($row['active']) {
                 case 0:
-                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='approve' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Approve</button>";
+                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='approve' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-sm btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Approve</button>";
                     $in_active_label = 'Pending';
                     break;
                 case 1:
                     $in_active_label = 'Active';
-                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='deactivate' data-status=2 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-warning btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Deactivate</button>";
+                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='deactivate' data-status=2 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-sm btn-warning btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Deactivate</button>";
                     break;
                 case 2:
                     $in_active_label = 'Deactivate';
-                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='reactivate' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Reactivate</button>";
+                    $view .= " <button type='button' data-id='" . $row['user_id'] . "' data-action='reactivate' data-status=1 data-toggle='modal' data-target='#largeModal-active-inactive' class='btn btn-sm btn-success btn-update-status' id='update-active-inactive-" . $row['user_id'] . "'>Reactivate</button>";
                 default:
                     break;
             }
 
             $output['aaData'][] = array(
+            	$row['username'],
                 $row['email_address'],
                 $row['first_name'],
                 $row['last_name'],
@@ -235,12 +244,24 @@ class Users extends CI_Controller {
     }
 
     public function view() {
-        $this->load_view('user_info_view');
+    	$data = array();
+    	if ($this->input->get('user') != NULL) {
+    		$page = str_replace(array('-', '_', '~'), array('+', '/', '='), $this->input->get('user'));
+    		$decoded = $this->encrypt->decode($page);
+    		$info = $this->Users->get_user_info($decoded);
+    		if ($info) {
+    			$data['user'] = $info;
+    			$data['id'] = $this->input->get('user');
+    		}
+    	}
+        $this->load_view('user_info_view', $data);
     }
 
-    public function load_view($view) {
+    private function load_view($view) {
         $data['menu'] = $this->common_model->get_menu('ADMIN');
-        $this->load->view('admin/header_main');
+        $data['img'] = $this->session->userdata('img');
+        $data['name'] = $this->session->userdata('account_name');
+        $this->load->view('admin/header_main', $data);
         $this->load->view('admin/side_menu_view', $data);
         $this->load->view('admin/' . $view);
         $this->load->view('admin/footer');

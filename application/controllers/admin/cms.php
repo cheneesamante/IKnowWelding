@@ -11,6 +11,11 @@ class Cms extends CI_Controller {
         $this->load->model('admin_model', 'Admin');
         $this->load->model('common_model');
         $this->load->library('encrypt');
+    	$this->load->library('session');
+        $user = $this->session->userdata('username');
+        if(!$user){
+        	redirect('admin/login');
+        }
     }
 
     /* public function index() {
@@ -33,9 +38,11 @@ class Cms extends CI_Controller {
         $this->load_view('cms_view');
     }
 
-    public function load_view($view, $param = NULL) {
+    private function load_view($view, $param = NULL) {
         $data['menu'] = $this->common_model->get_menu('ADMIN');
-        $this->load->view('admin/header_main');
+        $data['img'] = $this->session->userdata('img');
+        $data['name'] = $this->session->userdata('account_name');
+        $this->load->view('admin/header_main', $data);
         $this->load->view('admin/side_menu_view', $data);
         $this->load->view('admin/' . $view, $param);
         $this->load->view('admin/footer');

@@ -9,13 +9,16 @@ class Admin_model extends CI_Model {
 
     public function check_user($param_users_details = array()) {
         $data = null;
-        $username_email = $param_users_details['username_email'];
+        $username = $param_users_details['username'];
         $password = $param_users_details['password'];
 
         if (count($param_users_details) > 0) {
 
-            $sql = 'SELECT * FROM user_info WHERE username = ? or email_address = ? AND password = ? LIMIT 0, 1';
-            $qry = $this->db->query($sql, array($username_email, $username_email, md5($password)));
+            $sql = 'SELECT * FROM accounts ac
+            			INNER JOIN account_details acd ON acd.acct_detail_id = ac.acct_detail_id
+            		WHERE username = ? AND password = ? LIMIT 0, 1';
+            $qry = $this->db->query($sql, array($username, md5($password)));
+
             $data = array();
 
             if ($qry->num_rows() > 0) {
@@ -25,6 +28,7 @@ class Admin_model extends CI_Model {
                 $data = $user_info;
             }
         }
+
         return $data;
     }
 

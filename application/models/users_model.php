@@ -37,7 +37,7 @@ class Users_model extends CI_Model {
         $qry = $this->db->query($sql);
 
         if ($qry->num_rows() > 0) {
-            $info = $qry->row();
+            $info = $qry->row_array();
         }
 
         $data = $info;
@@ -154,7 +154,7 @@ class Users_model extends CI_Model {
     public function view_users($search = NULL, $order = NULL, $limit = NULL) {
         $data = array();
 
-        $sql = 'SELECT user_id, username, email_address, first_name, last_name, reg_date, active FROM user_info';
+        $sql = 'SELECT user_id, username, email_address, first_name, last_name, reg_date, active, img_url FROM user_info';
 
         $sql .=!is_null($search) ? $search : "";
         $sql .=!is_null($order) ? $order : "";

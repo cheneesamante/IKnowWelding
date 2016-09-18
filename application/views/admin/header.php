@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="<?php echo ADMIN_DIST_PATH; ?>css/AdminLTE.min.css" type="text/css" media="screen">
     <!-- iCheck -->
 	<link rel="stylesheet" href="<?php echo ADMIN_PLUGIN_PATH; ?>iCheck/square/blue.css" type="text/css" media="screen">
-
+    <!-- jQuery 2.1.4 -->
+    <script src="<?php echo ADMIN_PLUGIN_PATH; ?>jQuery/jQuery-2.1.4.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

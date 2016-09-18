@@ -42,13 +42,8 @@ $route['default_controller'] = "home";
 $route['404_override'] = '';
 $route['menu/(:any)'] = 'home/index/$1'; 
 $route['signup'] = 'home/signup'; 
-
-//$route['common/pages'] = "index/$1";
-//$route['common'] = "$1";
-//$route['admin'] = "$1";
-//$route['ird'] = "$1";
-//$route['login'] = 'index';
-
+$route['admin'] = 'admin/login';
+$route['admin/signout'] = 'admin/home/logout';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

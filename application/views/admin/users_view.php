@@ -11,8 +11,8 @@
             "order": [[0, "desc"]],
             "bLengthChange": false,
             "aoColumnDefs": [
-                {"bSortable": true, "aTargets": [0, 1, 2, 3, 4]},
-                {"bSortable": false, "aTargets": [5]}
+                {"bSortable": true, "aTargets": [0, 1, 2, 3, 4, 5]},
+                {"bSortable": false, "aTargets": [6]}
             ],
             "aaSorting": [[0, "desc"]], // Sort by first column descending
             "fnServerData": function (sSource, aoData, fnCallback) {
@@ -122,6 +122,7 @@
                 <table id="tbl-users" class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>Username</th>
                             <th>Email Address</th>
                             <th>First Name</th>
                             <th>Last Name</th>

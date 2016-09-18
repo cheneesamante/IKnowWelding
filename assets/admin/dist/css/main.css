@@ -33,3 +33,7 @@
 .error{
     color: red;
 }
+
+.signout{
+    width: 150px !important;
+}

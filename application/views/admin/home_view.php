@@ -3,35 +3,61 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Blank page
-            <small>it all starts here</small>
+            Dashboard
+            <small>Control panel</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
-            <li class="active">Blank page</li>
+            <li class="active">Dashboard</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
 
-          <!-- Default box -->
-          <div class="box">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+              <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                  <div class="inner">
+                    <h3><?php echo $total_users; ?></h3>
+                    <p>Registered Users</p>
+                  </div>
+                  <a href="<?php echo site_url('admin/users'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div><!-- ./col -->
+          </div><!-- /.row -->
+          <br/>
+          <?php if($total_new > 0): ?>
+          <div class="row">
+            <div class="col-md-12">
+                  <!-- USERS LIST -->
+                  <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Title</h3>
+            
+                      <h3 class="box-title">Latest Members</h3>
               <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                        <span class="label label-danger"><?php echo $total_new?> Active New Members</span>
               </div>
-            </div>
-            <div class="box-body">
-              Start creating your amazing application!
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                      <ul class="users-list clearfix">
+                        <?php  foreach($users as $user): ?>
+                        <li>
+                          <img src="<?php echo ADMIN_DIST_PATH; ?>/img/user1-128x128.jpg" alt="User Image">
+                          <a class="users-list-name"><?php echo $user['name']; ?></a>
+                          <span class="users-list-date"><?php echo $user['reg']; ?></span>
+                        </li>
+                        <?php endforeach; ?>
+                      </ul><!-- /.users-list -->
             </div><!-- /.box-body -->
-            <div class="box-footer">
-              Footer
+                    <div class="box-footer text-center">
+                      <a href="<?php echo site_url('admin/users'); ?>" class="uppercase">View All Users</a>
             </div><!-- /.box-footer-->
           </div><!-- /.box -->
-
+                </div><!-- /.col -->
+          </div>
+          <?php endif; ?>
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
