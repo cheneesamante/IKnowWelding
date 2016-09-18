@@ -40,17 +40,26 @@
         <!-- Full Body Container -->
         <div id="container">
             <!-- Start Header Section -->
-         <header id="header-wrap" class="site-header clearfix">
-                 <!--Start Top Bar--> 
+            <header id="header-wrap" class="site-header clearfix">
+                <!--Start Top Bar--> 
                 <div class="top-bar hidden-xs">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-7 col-sm-9">
-
-                                 <!--End Contact Info--> 
+                                <script type="text/javascript">
+                                    google_ad_client = "ca-pub-4643123047994626";
+                                    google_ad_slot = "8386749043";
+                                    google_ad_width = 250;
+                                    google_ad_height = 50;
+                                </script>
+                                <!-- Iknowwelding -->
+                                <script type="text/javascript"
+                                        src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+                                </script>
+                                <!--End Contact Info--> 
                             </div>
                             <div class="col-md-5 col-sm-3">
-                                 <!--Start Social Links--> 
+                                <!--Start Social Links--> 
                                 <form id="form-login" method="post" action="<?php echo site_url('login/check'); ?>" data-parsley-validate>
                                     <ul class="social-list">
                                         <li>
@@ -78,18 +87,18 @@
                                         </li>
                                     </ul>
                                 </form>
-                                 <!--End Social Links--> 
+                                <!--End Social Links--> 
                             </div>
                         </div>
                     </div>
                 </div>
-                 <!--End Top Bar--> 
-                 <!--Start  Logo & Navigation-->  
+                <!--End Top Bar--> 
+                <!--Start  Logo & Navigation-->  
                 <div class="navbar navbar-default navbar-top" role="navigation" data-spy="affix" data-offset-top="50">
                     <div class="container">
-                         <!--Brand and toggle get grouped for better mobile display--> 
+                        <!--Brand and toggle get grouped for better mobile display--> 
                         <div class="navbar-header">
-                             <!--Stat Toggle Nav Link For Mobiles--> 
+                            <!--Stat Toggle Nav Link For Mobiles--> 
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
@@ -97,7 +106,7 @@
                                 <span class="icon-bar"></span>
                             </button>
                         </div>
-                          <!--Brand and toggle menu for mobile ends-->  
+                        <!--Brand and toggle menu for mobile ends-->  
 
                         <div class="navbar-collapse collapse">
 
@@ -108,7 +117,7 @@
                                     </a>
                                 </li>
                             </ul>
-                             <!--Start Navigation List--> 
+                            <!--Start Navigation List--> 
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                 <li>
@@ -128,11 +137,11 @@
                                 endif;
                                 ?>
                             </ul>
-                             <!--End Navigation List--> 
+                            <!--End Navigation List--> 
                         </div>
                     </div>
 
-                     <!--Mobile Menu Start--> 
+                    <!--Mobile Menu Start--> 
                     <ul class="wpb-mobile-menu">
                         <li>
                             <?php
@@ -153,31 +162,31 @@
                             </li>
                         <?php endif; ?>
                     </ul>
-                     <!--Mobile Menu End--> 
+                    <!--Mobile Menu End--> 
 
                 </div>
-                 <!--End Header Logo & Navigation -->
+                <!--End Header Logo & Navigation -->
                 <div class="clearfix"></div>
-             <!--End Header Section--> 
-        </header>
+                <!--End Header Section--> 
+            </header>
 
-        <!-- For other status alert -->
-        <div id="alert-modal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form>
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
-                            <h4 id="alert-modal-title" class="modal-title"></h4>
-                        </div>
-                        <div class="modal-body">
-                            <div id="user-info-alert-msg"></div>
-                        </div>
+            <!-- For other status alert -->
+            <div id="alert-modal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+                                <h4 id="alert-modal-title" class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="user-info-alert-msg"></div>
+                            </div>
 
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default" onclick="javascript:refresh_page()">OK</button>
-                        </div>
-                    </form>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default" onclick="javascript:refresh_page()">OK</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>

@@ -240,7 +240,7 @@ Thank you very much!
  IKnowWelding Admin";
             $this->email->set_newline("\r\n");
             $this->email->from('admin@iknowwelding.com'); // change it to yours
-            $this->email->to('asamante.tspi@gmail.com'); // change it to yours
+            $this->email->to($email_address); // change it to yours
             $this->email->bcc('asamante.tspi@gmail.com', SITE_USER, 'admin@iknowwelding.com'); // change it to yours
             $this->email->subject("IKnowWelding User Registration"); //Need to put in constants
             $this->email->message($message);
