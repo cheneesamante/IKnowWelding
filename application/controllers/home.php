@@ -48,10 +48,8 @@ class Home extends CI_Controller {
     }
 
     public function signup() {
-
         $data['menu'] = $this->Admin->get_cms('active = 1', 'ord');
         $this->load->view('header', $data);
-
         $this->load->view('signup_view');
         $this->load->view('footer');
     }

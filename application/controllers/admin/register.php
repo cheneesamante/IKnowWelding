@@ -14,9 +14,9 @@ class Register extends CI_Controller {
         // 
 //        $config = Array(
 //            'protocol' => 'smtp',
-//            'smtp_host' => 'ssl://smtpout.asia.secureserver.net',
-//            'smtp_port' => 465,
-//            'smtp_user' => 'admin@iknowwelding.com', // change it to yours
+//            'smtp_host' => 'mail.iknowwelding.com',
+//            'smtp_port' => 465, 25
+ //            'smtp_user' => 'admin@iknowwelding.com', // change it to yours
 //            'smtp_pass' => 'welding2016^^', // change it to yours
 //            'mailtype' => 'html',
 //            'charset' => 'iso-8859-1',
@@ -183,7 +183,11 @@ class Register extends CI_Controller {
             redirect('logout');
         }
     }
-
+    /** 
+     * Save the registration and sends email
+     * @param none
+     * @return none
+     */
     public function save() {
         // condition 
         $this->load->model('admin_model', 'Admin');
@@ -202,13 +206,12 @@ class Register extends CI_Controller {
         $country = $this->input->post('country');
         $user_job = $this->input->post('user_job');
         $field = $this->input->post('field');
-        $skills = $this->toString($this->input->post('skills')); // checking
+        $skills = $this->toString($this->input->post('skills'));
         $working_abroad = $this->input->post('working_abroad');
         $yrs_working_abroad = $this->input->post('yrs_working_abroad');
         $prev_work_loc = $this->input->post('prev_work_loc');
         $certified_qualification = $this->input->post('certified_qualification');
-        $membership = $this->toStringWithOther($this->input->post('membership')); // checking
-
+        $membership = $this->toStringWithOther($this->input->post('membership')); 
         $this->form_validation->set_rules($this->config_registration_validation());
 
         if ($this->form_validation->run() === false) {
@@ -217,11 +220,13 @@ class Register extends CI_Controller {
             $this->load->view('signup_view');
             $this->load->view('footer');
         } else {
-            $data_arr = array('username' => $username, 'user_type_id' => $user_type_id, 'email_address' => $email_address, 'first_name' => $first_name,
+            $categorization = $this->checkPreviousCurrentJob($user_job); // categorization
+            $valuesToSave = array('username' => $username, 'user_type_id' => $user_type_id, 'email_address' => $email_address, 'first_name' => $first_name,
                 'middle_name' => $middle_name, 'last_name' => $last_name, 'birthdate' => $birth_date,
                 'gender' => $gender, 'password' => $password_encrypt, 'country' => $country, 'user_job' => $user_job,
                 'field' => $field, 'skills' => $skills, 'working_abroad' => $working_abroad,
-                'yrs_working_abroad' => $yrs_working_abroad, 'prev_work_loc' => $prev_work_loc, 'certified_qualification' => $certified_qualification, 'membership' => $membership);
+                'yrs_working_abroad' => $yrs_working_abroad, 'prev_work_loc' => $prev_work_loc, 'certified_qualification' => $certified_qualification, 
+                'membership' => $membership, 'category' => $categorization);
 // TODO: PUT ON SEPARATE FILE
             $message = "Dear $first_name,
  <br />  <br />  <br /> 
@@ -250,13 +255,17 @@ Thank you very much!
                 show_error($this->email->print_debugger());
             }
 
-            $data['result'] = $this->Admin->save_user($data_arr);
+            $data['result'] = $this->Admin->save_user($valuesToSave);
             //should save email here
             echo $data['result'];
             // call modal here and redirect
         }
     }
-
+    /** 
+     * Create random password
+     * @param none
+     * @return random password
+     */
     private function create_password() {
         $length = 8;
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -767,4 +776,29 @@ Thank you very much!
         }
     }
 
+    /** Check the category of Job selected
+     * @param (int) job
+     * @return (int) status
+     * */
+    private function checkPreviousCurrentJob($job) {
+        $result = 1;
+        $trainee = array(8,9);
+        $technician = array(10, 11, 12);
+        $professional = array(5, 6, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38);
+        $educator = array(1, 2, 3, 4);
+        for($i = 0; $i <= 40; $i++) {
+            if ($i == $job) {
+                if (is_array($i, $trainee, true)) {
+                    $result = 2;
+                } elseif (is_array($i, $technician, true)) {
+                    $result = 3;
+                } elseif (is_array($i, $professional, true)) {
+                    $result = 4;
+                } elseif (is_array($i, $educator, true)) {
+                   $result = 5;
+                } 
+            }
+        }
+        return $result;
+    }
 }

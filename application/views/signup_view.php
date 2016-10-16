@@ -52,8 +52,45 @@
 
                 <label for="job">Previous/Current job related to welding</label>
                 <select id="user_job" name="user_job" data-parsley-trigger="change" >
-                    <option value="" <?php echo set_select('user_job', '', true); ?>>-- Select a field --</option>
-                    <optgroup label="Commercial Industry">
+                    <option value="" <?php echo set_select('user_job', '0', true); ?>>-- Select a job --</option>
+                    <option value="1" <?php echo set_select('user_job', '01'); ?>>None - Interested to know something about welding</option>
+                    <option value="1" <?php echo set_select('user_job', '1'); ?>>Education</option>
+                    <option value="1" <?php echo set_select('user_job', '2'); ?>>Certified Welding Educator</option>
+                    <option value="1" <?php echo set_select('user_job', '3'); ?>>Welding Instructor</option>
+                    <option value="1" <?php echo set_select('user_job', '4'); ?>>Welder’s Trainer</option>
+                    <option value="1" <?php echo set_select('user_job', '5'); ?>>Engineering</option>
+                    <option value="1" <?php echo set_select('user_job', '6'); ?>>Certified Welding Engineer</option>
+                    <option value="1" <?php echo set_select('user_job', '7'); ?>>Production</option>
+                    <option value="1" <?php echo set_select('user_job', '8'); ?>>Welder</option>
+                    <option value="1" <?php echo set_select('user_job', '9'); ?>>Certified Welder</option>
+                    <option value="1" <?php echo set_select('user_job', '10'); ?>>Welding Operator</option>
+                    <option value="1" <?php echo set_select('user_job', '11'); ?>>Certified Robotic Arc Welding</option>
+                    <option value="1" <?php echo set_select('user_job', '12'); ?>>Certified Welding Fabricator</option>
+                    <option value="1" <?php echo set_select('user_job', '13'); ?>>Welding Foreman</option>
+                    <option value="1" <?php echo set_select('user_job', '14'); ?>>Welding Supervisor</option>
+                    <option value="1" <?php echo set_select('user_job', '15'); ?>>Certified Welding Supervisor</option>
+                    <option value="1" <?php echo set_select('user_job', '16'); ?>>Welding Superintendent</option>
+                    <option value="1" <?php echo set_select('user_job', '17'); ?>>Welding Coordinator</option>
+                    <option value="1" <?php echo set_select('user_job', '18'); ?>>Welding Manager</option>
+                    <option value="1" <?php echo set_select('user_job', '19'); ?>>QA/QC</option>
+                    <option value="1" <?php echo set_select('user_job', '20'); ?>>Welding Engineer</option>
+                    <option value="1" <?php echo set_select('user_job', '21'); ?>>Certified Senior Welding Inspector</option>
+                    <option value="1" <?php echo set_select('user_job', '22'); ?>>Certified Welding Inspector</option>
+                    <option value="1" <?php echo set_select('user_job', '23'); ?>>Welding Inspector</option>
+                    <option value="1" <?php echo set_select('user_job', '24'); ?>>QA/QC Engineer </option>
+                    <option value="1" <?php echo set_select('user_job', '25'); ?>>QC Inspector </option>
+                    <option value="1" <?php echo set_select('user_job', '26'); ?>>QC Coordinator</option>
+                    <option value="1" <?php echo set_select('user_job', '27'); ?>>QA/QC Manager</option>
+                    <option value="1" <?php echo set_select('user_job', '28'); ?>>Other related to QA/QC</option>
+                    <option value="1" <?php echo set_select('user_job', '29'); ?>>NDT</option>
+                    <option value="1" <?php echo set_select('user_job', '30'); ?>>NDT Technician Level III</option>
+                    <option value="1" <?php echo set_select('user_job', '31'); ?>>NDT Technician Level II</option>
+                    <option value="1" <?php echo set_select('user_job', '32'); ?>>NDT Technician Level I</option>
+                    <option value="1" <?php echo set_select('user_job', '33'); ?>>Certified Radiographic Interpreter</option>
+                    <option value="1" <?php echo set_select('user_job', '34'); ?>>Sales</option>
+                    <option value="1" <?php echo set_select('user_job', '35'); ?>>Certified Welding Sales Representative</option>
+                    <option value="1" <?php echo set_select('user_job', '36'); ?>>Welding Sales Representative</option>
+<!--                    <optgroup label="Commercial Industry">
                         <option value="1" <?php echo set_select('user_job', '1'); ?>>Education</option>
                         <option value="2" <?php echo set_select('user_job', '2'); ?>>Research and Development</option>
                         <option value="3" <?php echo set_select('user_job', '3'); ?>>Design/Engineering</option>
@@ -71,7 +108,7 @@
                         <option value="13" <?php echo set_select('user_job', '13'); ?>>Sales</option>
                         <option value="14" <?php echo set_select('user_job', '14'); ?>>Maintenance</option>
                         <option value="15">Skilled</option>
-                    </optgroup>
+                    </optgroup>-->
                 </select>
 
                 <label for="field">Field</label>

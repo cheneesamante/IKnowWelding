@@ -166,27 +166,13 @@ class Admin_model extends CI_Model {
         return $data;
     }
 
-    public function save_user($param_array = array()) {
-        if (count($param_array) > 0) {
-            // To be depricated and add server side validation
-//
-//            $data = array(
-//                'username' => $param_array['username'],
-//                'email_address' => $param_array['email_address'],
-//                'first_name' => $param_array['first_name'],
-//                'middle_name' => $param_array['middle_name'],
-//                'last_name' => $param_array['last_name'],
-//                'birthdate' => $param_array['birthdate'],
-//                'gender' => $param_array['gender'],
-//                'password' => $param_array['password'],
-//                'user_type_id' => $param_array['user_type_id'],
-//                'city_name' => $param_array['city_name'],
-//                'reg_date' => date('Y-m-d H:i:s')
-//            );
-//            
-
-            $this->db->insert('user_info', $param_array);
-        }
+    /**
+     * Save user into `user_info` table
+     * @param (array) $valuesToSave
+     * @return (boolean) 
+     */
+    public function save_user($valuesToSave = array()) {
+        $this->db->insert('user_info', $valuesToSave);
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 

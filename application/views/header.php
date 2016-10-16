@@ -126,7 +126,7 @@
                                     </a>
                                 </li>
                                 <?php
-                                if ($menu):
+                                if (isset($menu)):
                                     foreach ($menu as $m):
                                         echo "<li>
 								  <a href='" . site_url('/menu/' . $m['page_name']) . "'>
