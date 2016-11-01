@@ -95,4 +95,7 @@ define('SITE_CHARSET', 'iso-8859-1');
 define('SITE_WORDWRAP', true);
 
 /* End of file constants.php */
+
+// Upload
+define('ALLOW_TYPES', 'gif|jpg|png|docx'); 
 /* Location: ./application/config/constants.php */

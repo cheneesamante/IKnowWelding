@@ -60,6 +60,7 @@
                             </div>
                             <div class="col-md-5 col-sm-3">
                                 <!--Start Social Links--> 
+                                <a href="<?php echo site_url('upload'); ?>" /> Upload Test </a>
                                 <form id="form-login" method="post" action="<?php echo site_url('login/check'); ?>" data-parsley-validate>
                                     <ul class="social-list">
                                         <li>

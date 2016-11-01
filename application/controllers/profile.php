@@ -8,6 +8,7 @@ class Profile extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('common');
+        $this->load->library('upload');
         $this->load->model('admin_model', 'Admin');
     }
 

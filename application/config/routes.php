@@ -43,6 +43,7 @@ $route['404_override'] = '';
 $route['menu/(:any)'] = 'home/index/$1'; 
 $route['signup'] = 'home/signup'; 
 $route['admin'] = 'admin/login';
+$route['upload'] = 'common/upload_files';
 $route['admin/signout'] = 'admin/home/logout';
 
 /* End of file routes.php */
