@@ -7,34 +7,34 @@ class Admin_model extends CI_Model {
         parent::__construct();
     }
 
-    public function check_user($param_users_details = array()) {
-        $data = null;
-        $username = $param_users_details['username'];
-        $password = $param_users_details['password'];
-
-        if (count($param_users_details) > 0) {
-
-            $sql = 'SELECT * FROM accounts ac
+    public function check_user($param_users_details = array(), $isAdmin = false) {
+        $data = [];
+        if (count($param_users_details)) {
+            $sql = 'SELECT * FROM user_info
+            		WHERE username = ? OR email_address = ? AND password = ? LIMIT 0, 1';
+            $query = array($param_users_details['username'], $param_users_details['username'], md5($param_users_details['password']));
+            if ($isAdmin) {
+                $sql = 'SELECT * FROM accounts ac
             			INNER JOIN account_details acd ON acd.acct_detail_id = ac.acct_detail_id
             		WHERE username = ? AND password = ? LIMIT 0, 1';
-            $qry = $this->db->query($sql, array($username, md5($password)));
+                $query = array($param_users_details['username'], md5($param_users_details['password']));
+            }
 
-            $data = array();
+            $res = $this->db->query($sql, $query);
 
-            if ($qry->num_rows() > 0) {
-                $info = $qry->result_array();
+            if ($res->num_rows() > 0) {
+                $info = $res->result_array();
                 $user_info = $info[0];
                 unset($user_info['password']);
                 $data = $user_info;
             }
         }
-
         return $data;
     }
 
     public function check_email_exists($email, $id = null) {
         $sql = 'SELECT * FROM user_info WHERE email_address = ?';
-        $sql .=!is_null($id) ? " AND user_id != $id" : '';
+        $sql .= !is_null($id) ? " AND user_id != $id" : '';
 
         $qry = $this->db->query($sql, $email);
 
@@ -49,7 +49,7 @@ class Admin_model extends CI_Model {
 
 
         $sql = 'SELECT * FROM user_info WHERE username = ?';
-        $sql .=!is_null($id) ? " AND user_id != $id" : '';
+        $sql .= !is_null($id) ? " AND user_id != $id" : '';
 
         $qry = $this->db->query($sql, $username);
         $data = FALSE;
@@ -69,9 +69,9 @@ class Admin_model extends CI_Model {
                 . 'IF (active = 1, "active", "inactive") as active_desc  '
                 . 'FROM cms ';
 
-        $sql .=!is_null($search) ? ' WHERE ' . $search : "";
+        $sql .= !is_null($search) ? ' WHERE ' . $search : "";
         //$sql .=!is_null($order) ? $order : "";
-        $sql .=!is_null($limit) ? $limit : "";
+        $sql .= !is_null($limit) ? $limit : "";
 
         $qry = $this->db->query($sql);
 
@@ -86,7 +86,7 @@ class Admin_model extends CI_Model {
         $data = array();
 
         $sql = 'SELECT count(*) as total FROM cms';
-        $sql .=!is_null($search) ? $search : "";
+        $sql .= !is_null($search) ? $search : "";
 
         $qry = $this->db->query($sql);
 
@@ -103,7 +103,7 @@ class Admin_model extends CI_Model {
         $sql = 'SELECT count(*) as total  FROM sister_cities city '
                 . 'LEFT JOIN user_info user ON city.last_updated_by = user.user_id '
                 . 'LEFT JOIN user_info created ON city.user_id = created.user_id ';
-        $sql .=!is_null($search) ? $search : "";
+        $sql .= !is_null($search) ? $search : "";
 
         $qry = $this->db->query($sql);
 
@@ -138,9 +138,9 @@ class Admin_model extends CI_Model {
                 . 'IF (user_type_id = 1, "Administrator", IF (user_type_id = 2, "IRD", "N/A")) '
                 . 'as user_type_desc  FROM user_info';
 
-        $sql .=!is_null($search) ? $search : "";
-        $sql .=!is_null($order) ? $order : "";
-        $sql .=!is_null($limit) ? $limit : "";
+        $sql .= !is_null($search) ? $search : "";
+        $sql .= !is_null($order) ? $order : "";
+        $sql .= !is_null($limit) ? $limit : "";
 
         $qry = $this->db->query($sql);
 
@@ -155,7 +155,7 @@ class Admin_model extends CI_Model {
         $data = array();
 
         $sql = 'SELECT count(*) as total FROM user_info ';
-        $sql .=!is_null($search) ? $search : "";
+        $sql .= !is_null($search) ? $search : "";
 
         $qry = $this->db->query($sql);
 

@@ -119,7 +119,7 @@ class Login extends CI_Controller {
                 if ($username) {
                     if ($password) {
                         $this->load->model('admin_model', 'Admin');
-                        $data = $this->Admin->check_user(array('username_email' => $username, 'password' => $password));
+                        $data = $this->Admin->check_user(array('username_email' => $username, 'password' => $password), true);
                         if (count($data) > 0) {
                             $menu =$this->common->_menu($data['user_type_id']);
                             $this->session->set_userdata(array('menu'=>$menu));

@@ -86,6 +86,7 @@
                                                 <input class="btn btn-border btn-login" type="submit" value="Sign in" />
                                             </div>
                                         </li>
+                                        <li><?=isset($message) ? $message : '';?></li>
                                     </ul>
                                 </form>
                                 <!--End Social Links--> 

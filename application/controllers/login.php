@@ -25,15 +25,16 @@ class Login extends CI_Controller {
     }
 
     public function check() {
-        $username = $this->input->post('username'); // username or email address
-        $password = $this->input->post('password');
-        $view = 'home_view';
+        $view = "home_view";
+        $header = "header";
         $error = false;
-        if ($username) {
-            if ($password) {
+
+        if ($this->input->post('username')) {
+            if ($this->input->post('password')) {
                 $this->load->model('admin_model', 'Admin');
-                $data = $this->Admin->check_user(array('username_email' => $username, 'password' => $password));
-                if (count($data) > 0) {
+                $data = $this->Admin->check_user(array('username' => $username = $this->input->post('username'),
+                     'password' => $username = $this->input->post('password')));
+                if (count($data)) {
                     $check_view = $this->common->_get_view();
                     if ($data['active'] == 0) {
                         $error = 2;
@@ -46,6 +47,7 @@ class Login extends CI_Controller {
 //                        }
 //                    }
                     $view = $check_view;
+                    $header = "header_main";
                 } else {
                     $error = 1;
                 }
@@ -67,15 +69,15 @@ class Login extends CI_Controller {
             case 4:
                 $error = 'Please contact the system administrator.';
                 break;
+            default:
+                "";
         }
-        if (!$error) {
-//            echo json_encode(array('err' => true, 'msg' => $error));
-            $this->load->view('header_main');
+        var_dump($view);
+        var_dump($header);
+            die("here");
+            $this->load->view($header, ["message" => $error]);
             $this->load->view($view);
             $this->load->view('footer');
-        } else {
-//            echo json_encode(array('err' => false));
-        }
     }
 
     private function authentication() {

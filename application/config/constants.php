@@ -97,5 +97,6 @@ define('SITE_WORDWRAP', true);
 /* End of file constants.php */
 
 // Upload
-define('ALLOW_TYPES', 'gif|jpg|png|docx'); 
+define('ALLOW_TYPES', 'gif|jpg|png|docx|doc|jpeg|mp4'); 
+define('MAX_SIZE', 102400); 
 /* Location: ./application/config/constants.php */
