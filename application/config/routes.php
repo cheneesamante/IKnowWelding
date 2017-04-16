@@ -47,5 +47,7 @@ $route['upload'] = 'common/upload_files';
 $route['uploading'] = 'common/upload_files/upload';
 $route['admin/signout'] = 'admin/home/logout';
 
+$route['messages'] = 'common/personal_messages'; // for testing and development only
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
