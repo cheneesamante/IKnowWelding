@@ -6,11 +6,11 @@ if (!defined('BASEPATH'))
 class Personal_messages extends CI_Controller {
 
     public function __construct() {
-        //$this->load->helper('url');
-        //$this->output->set_template('default');
         parent::__construct();
         // Your own constructor code
         $this->load->helper('url');
+        $this->load->model('message_model');
+        $this->load->library('mahana_messaging');
     }
 
     public function index() {
@@ -26,13 +26,8 @@ class Personal_messages extends CI_Controller {
         switch ($function) {
 
             case('getState'):
-                $lines = "<span>Guest</span>Hello 
-<span>Guest</span>What's up 
-<span>Guest</span>akldj  
-<span>Guest</span>    
-<span>Guest</span> ";
-                $log['state'] = count($lines);
-                break;
+             var_dump($this->message_model->get_all_message());
+             break;
 
             case('update'):
                 $state = $_POST['state'];
